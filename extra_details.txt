@@ -22,7 +22,7 @@ Page Sections (in order, top to bottom)
         - Short brand statement
         - Scroll-reveal via Framer Motion whileInView
 
- 4. [ ] Services Section
+ 4. [x] Services Section
         - Black background
         - Grid of service cards (Strength, Cardio, CrossFit, Yoga, Personal Training, Nutrition)
         - Icon + title + short description per card
