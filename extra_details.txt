@@ -1,0 +1,114 @@
+SPARK FITNESS ZONE — TODO LIST
+===============================
+
+Page Sections (in order, top to bottom)
+-----------------------------------------
+ 1. [ ] Navbar
+        - Fixed top, glassmorphism (blur + dark overlay)
+        - Logo, nav links (Home, About, Services, Trainers, Equipment, Membership)
+        - Red CTA button ("Join Now")
+        - Hamburger menu for mobile
+        - Framer Motion mount animation
+
+ 2. [ ] Hero Section
+        - Full-viewport, background image/video
+        - Large Bebas Neue headline + Barlow Condensed subheadline
+        - Two CTAs: "Start Today" (red fill) + "See Memberships" (outlined)
+        - Staggered Framer Motion entrance animations
+
+ 3. [ ] About Strip
+        - Charcoal background
+        - Stat row: years open, members, trainers, sq ft
+        - Short brand statement
+        - Scroll-reveal via Framer Motion whileInView
+
+ 4. [ ] Services Section
+        - Black background
+        - Grid of service cards (Strength, Cardio, CrossFit, Yoga, Personal Training, Nutrition)
+        - Icon + title + short description per card
+        - Hover lift animation
+
+ 5. [ ] Trainers Section
+        - Carbon background
+        - Trainer cards from Sanity CMS (photo, name, specialisation, social links)
+        - Stagger animation on scroll
+
+ 6. [ ] Equipment / Machines Section
+        - Black background
+        - Grid of equipment cards, each linking to /equipment/[slug]
+        - Data from Sanity CMS (image, name, category tag)
+        - Animate in on scroll
+
+ 7. [ ] Booking CTA Strip
+        - Full-width banner with background texture/image
+        - Large headline ("Ready to Start?") + button → /book
+        - Parallax or scale-in effect via Framer Motion
+
+ 8. [ ] Membership / Pricing Section
+        - Charcoal background
+        - Pricing cards (Basic, Pro, Elite) — prices from Razorpay plan IDs in .env, NEVER hardcoded
+        - Highlight recommended plan
+        - "Join Now" button initiates Razorpay checkout
+        - Animate cards on scroll
+
+ 9. [ ] Customer Reviews Section
+        - Carbon background
+        - Testimonial cards from Sanity CMS (name, avatar, star rating, quote)
+        - Auto-scrolling carousel or staggered grid
+        - Framer Motion scroll-entry animations
+
+10. [ ] Google Maps Location Section  ← sits directly above the footer
+        - Full-width embedded Google Maps iframe (gym location in Jamshedpur)
+        - Gym address, phone number, and opening hours alongside the map
+        - Needs NEXT_PUBLIC_GOOGLE_MAPS_EMBED_URL in .env
+        - Fade-in on scroll
+
+11. [ ] Footer
+        - Logo, nav links, social icons
+        - Contact details (address, phone, email)
+        - Copyright line
+        - Barlow Condensed for headings, no animations needed
+
+
+Individual Pages
+-----------------
+12. [ ] /equipment/[slug] detail page UI
+        - Hero image (next/image), name, category, description, specs from Sanity
+        - generateMetadata already wired — just needs the UI
+        - Back-link to home equipment section
+
+13. [ ] /book page UI
+        - Headline + subtext wrapper around the Cal.com iframe
+        - Iframe fills remaining viewport height
+        - DO NOT replace iframe with a custom form
+
+
+Backend / Integrations
+------------------------
+14. [ ] Sanity Studio schema
+        - equipment: name, slug, description, image, category
+        - trainer: name, slug, photo, specialisation, bio, socials
+        - review: reviewerName, avatar, rating, quote, date
+        - Run `npx sanity dev` to verify Studio loads
+
+15. [ ] Razorpay subscription checkout
+        - Server Action or API route creates a subscription order using plan IDs from .env
+        - Add Razorpay JS checkout script to membership page (client component)
+        - On success: redirect or show confirmation
+        - Webhook at /api/razorpay/webhook already handles post-payment DB updates
+
+
+Global Polish
+--------------
+16. [ ] Noise overlay + custom scrollbar (globals.css)
+        - SVG fractal-noise body::before overlay (opacity 0.025, pointer-events none, z-index 9999)
+        - Red custom scrollbar (::-webkit-scrollbar)
+        - ::selection { background: var(--red) }
+
+
+WEBSITE DATA -
+
+1. Gym Name - Spark Fitness Zone 
+2. Location - 2nd floor and 3rd floor, IOCL PETROL PUMP, SHALIMAR PLAZA, CHEPA POOL Front, above APNA MART, N.H Colony, Chepapul, Mango, Jamshedpur, Jharkhand 832110
+3. Maps location - https://share.google/BEgXHQB2OvpSqmZZM
+

@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
+/* ─── Brand tokens (from reference/gym_demo.html :root) ─────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --black:     #080808;
+  --charcoal:  #111111;
+  --carbon:    #181818;
+  --red:       #D62828;
+  --red-hot:   #FF3333;
+  --gold:      #C9A84C;
+  --white:     #F4F0EB;
+  --offwhite:  #D8D0C4;
+  --gray:      #888880;
+  --dark-gray: #333330;
 }
 
+/* ─── Tailwind v4 theme (replaces tailwind.config.ts in v4) ─────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colours */
+  --color-black:      var(--black);
+  --color-charcoal:   var(--charcoal);
+  --color-carbon:     var(--carbon);
+  --color-red:        var(--red);
+  --color-red-hot:    var(--red-hot);
+  --color-gold:       var(--gold);
+  --color-white:      var(--white);
+  --color-offwhite:   var(--offwhite);
+  --color-gray:       var(--gray);
+  --color-dark-gray:  var(--dark-gray);
+
+  /* Fonts */
+  --font-display:   var(--font-bebas-neue),    sans-serif;
+  --font-condensed: var(--font-barlow-condensed), sans-serif;
+  --font-body:      var(--font-barlow),         sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ─── Base ───────────────────────────────────────────────────────────────── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-barlow), sans-serif;
 }
