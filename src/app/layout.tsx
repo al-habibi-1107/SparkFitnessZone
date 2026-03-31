@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Barlow_Condensed, Barlow } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -45,6 +46,8 @@ export default function RootLayout({
         <main className="flex-1 pt-[72px]">{children}</main>
         <LocationSection />
         <Footer />
+        {/* Razorpay Checkout SDK — loaded after interactive for performance */}
+        <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       </body>
     </html>
   );
