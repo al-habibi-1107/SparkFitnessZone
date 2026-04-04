@@ -1,0 +1,22 @@
+version: 2
+updates:
+  # Keep npm dependencies up-to-date automatically
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      # Group all non-breaking patch and minor updates into one PR
+      dependencies:
+        update-types:
+          - minor
+          - patch
+
+  # Keep GitHub Actions up-to-date
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
