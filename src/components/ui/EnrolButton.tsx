@@ -61,10 +61,10 @@ export default function EnrolButton({
   // Close on Escape
   useEffect(() => {
     if (!open) return;
-    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") handleClose(); };
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape" && !busy) setOpen(false); };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [open]);
+  }, [open, busy]);
 
   function handleOpen() {
     setStep(1);
