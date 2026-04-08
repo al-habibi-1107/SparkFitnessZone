@@ -38,7 +38,7 @@ export default function Hero() {
       {/* ── Background image ──────────────────────────────────────── */}
       <div className="absolute inset-0">
         <Image
-          src="/assets/hero-bg.jpg"
+          src="/assets/GYM_INTERIOR_1.jpg"
           alt=""
           fill
           priority

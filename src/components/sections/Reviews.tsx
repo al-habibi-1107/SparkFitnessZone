@@ -1,14 +1,14 @@
-"use client";
-
-import { motion } from "framer-motion";
 import {
   TestimonialsColumn,
   type Testimonial,
 } from "@/components/ui/testimonials-columns-1";
+import { getFeaturedReviews }  from "@/lib/sanity/queries";
+import { isSanityConfigured }  from "@/lib/sanity/client";
+import type { Review }         from "@/lib/sanity/types";
 
-// ── Data ─────────────────────────────────────────────────────────────────────
+// ── Static fallback ───────────────────────────────────────────────────────────
 
-const REVIEWS: Testimonial[] = [
+const STATIC_REVIEWS: Testimonial[] = [
   {
     quote:
       "I'd tried three gyms in Jamshedpur before this. Nothing came close. The trainers actually care about your progress, not just showing up.",
@@ -53,26 +53,43 @@ const REVIEWS: Testimonial[] = [
   },
 ];
 
-// Distribute evenly across three columns (2 each)
-const col1 = REVIEWS.slice(0, 2);
-const col2 = REVIEWS.slice(2, 4);
-const col3 = REVIEWS.slice(4, 6);
+function toTestimonial(r: Review): Testimonial {
+  return {
+    quote:  r.quote,
+    name:   r.reviewerName,
+    detail: r.memberSince ? `Member since ${r.memberSince}` : "",
+    rating: r.rating,
+  };
+}
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export default function Reviews() {
+export default async function Reviews() {
+  let reviews: Testimonial[] = STATIC_REVIEWS;
+
+  if (isSanityConfigured()) {
+    try {
+      const sanityDocs = await getFeaturedReviews();
+      if (sanityDocs.length > 0) {
+        reviews = sanityDocs.map(toTestimonial);
+      }
+    } catch {
+      // Sanity fetch failed — static fallback already set above
+    }
+  }
+
+  // Distribute evenly across three columns
+  const third  = Math.ceil(reviews.length / 3);
+  const col1   = reviews.slice(0, third);
+  const col2   = reviews.slice(third, third * 2);
+  const col3   = reviews.slice(third * 2);
+
   return (
     <section id="reviews" className="bg-carbon overflow-hidden">
       <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
 
         {/* ── Header ─────────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 36 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14"
-        >
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
           <div>
             <div className="flex items-center gap-[0.6rem] mb-3">
               <span aria-hidden="true" className="block w-6 h-px bg-red shrink-0" />
@@ -109,31 +126,15 @@ export default function Reviews() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* ── Scrolling columns ──────────────────────────────────── */}
-        {/*
-         * mask-image fades cards in/out at the top and bottom edges,
-         * creating the illusion of an infinite stream. max-h clips the
-         * visible window to ~3 cards tall.
-         */}
         <div
           className="flex justify-center gap-4 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] max-h-[680px] overflow-hidden"
         >
-          <TestimonialsColumn
-            testimonials={col1}
-            duration={15}
-          />
-          <TestimonialsColumn
-            testimonials={col2}
-            duration={19}
-            className="hidden md:block"
-          />
-          <TestimonialsColumn
-            testimonials={col3}
-            duration={17}
-            className="hidden lg:block"
-          />
+          <TestimonialsColumn testimonials={col1} duration={15} />
+          <TestimonialsColumn testimonials={col2} duration={19} className="hidden md:block" />
+          <TestimonialsColumn testimonials={col3} duration={17} className="hidden lg:block" />
         </div>
 
       </div>

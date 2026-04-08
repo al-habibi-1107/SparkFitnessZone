@@ -1,7 +1,7 @@
 import { getSanityClient } from "./client";
-import type { Equipment } from "./types";
+import type { Equipment, Trainer, Review } from "./types";
 
-export type { Equipment } from "./types";
+export type { Equipment, Trainer, Review } from "./types";
 
 const EQUIPMENT_FIELDS = `
   _id,
@@ -42,5 +42,53 @@ export async function getRelatedEquipment(
 export async function getAllEquipmentSlugs(): Promise<{ slug: string }[]> {
   return getSanityClient().fetch(
     `*[_type == "equipment"]{ "slug": slug.current }`
+  );
+}
+
+// ── Trainers ──────────────────────────────────────────────────────────────────
+
+const TRAINER_FIELDS = `
+  _id,
+  _type,
+  name,
+  "slug": slug.current,
+  photo,
+  role,
+  yearsExperience,
+  specialisms,
+  bio,
+  socials,
+  displayOrder
+`;
+
+export async function getAllTrainers(): Promise<Trainer[]> {
+  return getSanityClient().fetch(
+    `*[_type == "trainer"] | order(displayOrder asc){${TRAINER_FIELDS}}`
+  );
+}
+
+// ── Reviews ───────────────────────────────────────────────────────────────────
+
+const REVIEW_FIELDS = `
+  _id,
+  _type,
+  reviewerName,
+  avatar,
+  rating,
+  quote,
+  memberSince,
+  date,
+  isFeatured
+`;
+
+export async function getFeaturedReviews(): Promise<Review[]> {
+  return getSanityClient().fetch(
+    `*[_type == "review" && isFeatured == true] | order(date desc){${REVIEW_FIELDS}}`
+  );
+}
+
+export async function getAllReviews(): Promise<Review[]> {
+  return getSanityClient().fetch(
+    `*[_type == "review"] | order(date desc){${REVIEW_FIELDS}}`
   );
 }

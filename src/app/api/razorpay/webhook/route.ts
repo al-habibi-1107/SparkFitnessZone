@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import Razorpay from "razorpay";
-import { createClient } from "@/lib/supabase/client";
+import { NextRequest, NextResponse }                     from "next/server";
+import Razorpay                                           from "razorpay";
+import { updateMemberById, updateMemberBySubscriptionId } from "@/lib/firebase/admin";
 
 const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET!;
 
@@ -56,45 +56,28 @@ export async function POST(req: NextRequest) {
 
   // ── Process event ───────────────────────────────────────────────────────────
   try {
-    const supabase = createClient();
-
     if (
       event.event === "subscription.activated" ||
       event.event === "subscription.charged"
     ) {
       if (!memberId) {
-        // Subscription was created before a member record existed — log and skip.
-        console.warn("[webhook] subscription.activated: no member_id in notes, skipping DB update.", subscription.id);
+        console.warn("[webhook] subscription.activated: no member_id in notes, skipping.", subscription.id);
         return NextResponse.json({ received: true });
       }
 
-      const { error } = await supabase
-        .from("members")
-        .update({
-          subscription_id:     subscription.id,
-          subscription_status: subscription.status,
-        })
-        .eq("id", memberId);
-
-      if (error) {
-        console.error("[webhook] DB update failed for activated/charged:", error);
-        return NextResponse.json({ error: "DB update failed" }, { status: 500 });
-      }
+      await updateMemberById(memberId, {
+        subscriptionId:     subscription.id,
+        subscriptionStatus: subscription.status,
+      });
     }
 
     if (
       event.event === "subscription.cancelled" ||
       event.event === "subscription.expired"
     ) {
-      const { error } = await supabase
-        .from("members")
-        .update({ subscription_status: subscription.status })
-        .eq("subscription_id", subscription.id);
-
-      if (error) {
-        console.error("[webhook] DB update failed for cancelled/expired:", error);
-        return NextResponse.json({ error: "DB update failed" }, { status: 500 });
-      }
+      await updateMemberBySubscriptionId(subscription.id, {
+        subscriptionStatus: subscription.status,
+      });
     }
   } catch (err) {
     console.error("[webhook] Unexpected error during processing:", err);

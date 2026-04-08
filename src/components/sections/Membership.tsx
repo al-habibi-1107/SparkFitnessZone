@@ -25,8 +25,8 @@ async function fetchPlan(planId: string | undefined): Promise<RazorpayPlan | nul
   }
 }
 
-function formatAmount(plan: RazorpayPlan | null): string {
-  if (!plan) return "—";
+function formatAmount(plan: RazorpayPlan | null, fallback: string): string {
+  if (!plan) return fallback;
   return `₹${(plan.item.amount / 100).toLocaleString("en-IN")}`;
 }
 
@@ -34,12 +34,13 @@ function formatAmount(plan: RazorpayPlan | null): string {
 
 const PLAN_CONFIGS = [
   {
-    envKey:   "RAZORPAY_PLAN_MONTHLY_ID",
-    name:     "Monthly Plan",
-    period:   "Billed Monthly",
-    suffix:   "/mo",
-    featured: false,
-    badge:    null,
+    envKey:        "RAZORPAY_PLAN_MONTHLY_ID",
+    name:          "Monthly Plan",
+    period:        "Billed Monthly",
+    suffix:        "/mo",
+    fallbackPrice: "₹1,499",
+    featured:      false,
+    badge:         null,
     features: [
       "Full gym access — all zones",
       "Locker & shower access",
@@ -49,12 +50,13 @@ const PLAN_CONFIGS = [
     ],
   },
   {
-    envKey:   "RAZORPAY_PLAN_QUARTERLY_ID",
-    name:     "Quarterly Plan",
-    period:   "Billed Every 3 Months — Save 20%",
-    suffix:   "/qtr",
-    featured: true,
-    badge:    "Most Popular",
+    envKey:        "RAZORPAY_PLAN_QUARTERLY_ID",
+    name:          "Quarterly Plan",
+    period:        "Billed Every 3 Months — Save 20%",
+    suffix:        "/qtr",
+    fallbackPrice: "₹3,599",
+    featured:      true,
+    badge:         "Most Popular",
     features: [
       "Everything in Monthly",
       "Custom diet plan included",
@@ -65,12 +67,13 @@ const PLAN_CONFIGS = [
     ],
   },
   {
-    envKey:   "RAZORPAY_PLAN_ANNUAL_ID",
-    name:     "Annual Plan",
-    period:   "Billed Annually — Save 37%",
-    suffix:   "/yr",
-    featured: false,
-    badge:    null,
+    envKey:        "RAZORPAY_PLAN_ANNUAL_ID",
+    name:          "Annual Plan",
+    period:        "Billed Annually — Save 37%",
+    suffix:        "/yr",
+    fallbackPrice: "₹11,299",
+    featured:      false,
+    badge:         null,
     features: [
       "Everything in Quarterly",
       "Unlimited PT sessions",
@@ -86,7 +89,6 @@ const PLAN_CONFIGS = [
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default async function Membership() {
-  // Fetch all plan prices in parallel
   const plans = await Promise.all(
     PLAN_CONFIGS.map((cfg) =>
       fetchPlan(process.env[cfg.envKey as keyof NodeJS.ProcessEnv] as string | undefined),
@@ -120,9 +122,9 @@ export default async function Membership() {
         {/* ── Plans grid ─────────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
           {PLAN_CONFIGS.map((cfg, i) => {
-            const plan    = plans[i];
-            const planId  = process.env[cfg.envKey as keyof NodeJS.ProcessEnv] as string | undefined;
-            const price   = formatAmount(plan);
+            const plan   = plans[i];
+            const planId = (process.env[cfg.envKey as keyof NodeJS.ProcessEnv] as string | undefined) ?? "plan_placeholder";
+            const price  = formatAmount(plan, cfg.fallbackPrice);
 
             return (
               <div
@@ -174,21 +176,14 @@ export default async function Membership() {
                   ))}
                 </ul>
 
-                {/* Enrol button */}
-                {planId ? (
-                  <EnrolButton
-                    planId={planId}
-                    planName={cfg.name}
-                    price={price}
-                    period={cfg.period}
-                    features={cfg.features}
-                    featured={cfg.featured}
-                  />
-                ) : (
-                  <p className="font-condensed text-[0.75rem] tracking-[0.12em] uppercase text-gray/50 text-center py-3">
-                    Coming Soon
-                  </p>
-                )}
+                <EnrolButton
+                  planId={planId}
+                  planName={cfg.name}
+                  price={price}
+                  period={cfg.period}
+                  features={cfg.features}
+                  featured={cfg.featured}
+                />
               </div>
             );
           })}
