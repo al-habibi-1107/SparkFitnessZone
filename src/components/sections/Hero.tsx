@@ -112,16 +112,25 @@ export default function Hero() {
         {/* Sub-headline */}
         <motion.p
           {...fadeUp(0.2)}
-          className="text-[1.05rem] font-light leading-[1.7] text-offwhite max-w-[480px] mb-10"
+          className="text-[1.05rem] font-light leading-[1.7] text-offwhite max-w-[480px] mb-4"
         >
           Elite training, certified specialists, and science-backed programmes —
           built for people who are serious about results.
         </motion.p>
 
+        {/* Social nudge */}
+        <motion.p
+          {...fadeUp(0.25)}
+          className="font-condensed text-[0.78rem] tracking-[0.12em] uppercase text-gray mb-8"
+        >
+          <span className="text-red">800+</span> members already training ·{" "}
+          <span className="text-red">First session free</span>, no commitment
+        </motion.p>
+
         {/* CTAs */}
         <motion.div {...fadeUp(0.3)} className="flex gap-4 flex-wrap">
 
-          {/* Primary */}
+          {/* Primary — low friction first */}
           <a
             href="/book"
             className={[
@@ -132,7 +141,7 @@ export default function Hero() {
               "transition-all duration-200",
             ].join(" ")}
           >
-            Start Today
+            Book Free Trial
             <svg
               width="16" height="16" viewBox="0 0 24 24"
               fill="none" stroke="currentColor"
@@ -143,7 +152,7 @@ export default function Hero() {
             </svg>
           </a>
 
-          {/* Outline */}
+          {/* Secondary — for the buyer ready to commit */}
           <a
             href="#membership"
             className={[
@@ -153,7 +162,7 @@ export default function Hero() {
               "transition-all duration-200",
             ].join(" ")}
           >
-            See Memberships
+            View Plans
           </a>
         </motion.div>
       </div>
