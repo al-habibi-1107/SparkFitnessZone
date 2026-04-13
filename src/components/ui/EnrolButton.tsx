@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 // ── Razorpay types ────────────────────────────────────────────────────────────
 
@@ -149,8 +150,8 @@ export default function EnrolButton({
         Be a Member
       </button>
 
-      {/* ── Modal ─────────────────────────────────────────────── */}
-      {open && (
+      {/* ── Modal (portal — escapes card's CSS transform stacking context) ── */}
+      {open && createPortal(
         <>
           {/* Backdrop */}
           <div
@@ -412,7 +413,8 @@ export default function EnrolButton({
               </div>
             </div>
           </div>
-        </>
+        </>,
+        document.body,
       )}
     </>
   );
