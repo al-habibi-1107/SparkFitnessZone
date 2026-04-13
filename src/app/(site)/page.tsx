@@ -3,7 +3,8 @@ export const dynamic = "force-dynamic";
 
 import Hero        from "@/components/sections/Hero";
 import Services    from "@/components/sections/Services";
-import Trainers    from "@/components/sections/Trainers";
+// import Trainers    from "@/components/sections/Trainers";
+import BookTrainer from "@/components/sections/BookTrainer";
 import Reviews     from "@/components/sections/Reviews";
 import BookingStrip from "@/components/sections/BookingStrip";
 import Membership  from "@/components/sections/Membership";
@@ -27,7 +28,8 @@ export default function HomePage() {
     <>
       <Hero />
       <Services />
-      <Trainers />
+      {/* <Trainers /> */}
+      <BookTrainer />
       <Reviews />
       <BookingStrip />
       <Membership />
