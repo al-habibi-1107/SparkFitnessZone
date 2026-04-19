@@ -38,12 +38,12 @@ export default function Hero() {
       {/* ── Background image ──────────────────────────────────────── */}
       <div className="absolute inset-0">
         <Image
-          src="/assets/GYM_INTERIOR_1.jpg"
+          src="/assets/home_2.png"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-contain object-center"
         />
       </div>
 

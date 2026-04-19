@@ -14,7 +14,7 @@ const SERVICES = [
   },
   {
     num: "02",
-    image: "/assets/bodybuilding_1.jpg",
+    image: "/assets/bodybuilding_2.jpg",
     name: "BODY-\nBUILDING",
     desc: "Periodised strength and hypertrophy programming built around your schedule and recovery capacity. Compete, or just look the part — we train both.",
   },
