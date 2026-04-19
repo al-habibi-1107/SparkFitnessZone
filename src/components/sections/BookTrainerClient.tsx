@@ -66,78 +66,81 @@ export default function BookTrainerClient({ trainers }: { trainers: TrainerOptio
               </p>
             </div>
 
-            {/* Trainer tiles */}
-            <div className="flex flex-col gap-[1px] bg-dark-gray">
-              {trainers.map((trainer, i) => {
-                const isActive = i === selected;
-                return (
-                  <motion.button
-                    key={trainer.slug}
-                    type="button"
-                    onClick={() => setSelected(i)}
-                    whileTap={{ scale: 0.995 }}
-                    className={[
-                      "group relative w-full text-left px-7 py-6 transition-colors duration-200 cursor-pointer",
-                      "flex items-center gap-6",
-                      isActive
-                        ? "bg-[#1c1c1c] border-l-2 border-red"
-                        : "bg-charcoal hover:bg-[#181818] border-l-2 border-transparent",
-                    ].join(" ")}
-                    aria-pressed={isActive}
-                  >
-                    {/* Initials avatar */}
-                    <div
+            {/* Trainer tiles — scrollable so adding more trainers never breaks layout */}
+            <div className="relative">
+              <div className="flex flex-col gap-[1px] bg-dark-gray max-h-[420px] overflow-y-auto">
+                {trainers.map((trainer, i) => {
+                  const isActive = i === selected;
+                  return (
+                    <motion.button
+                      key={trainer.slug}
+                      type="button"
+                      onClick={() => setSelected(i)}
+                      whileTap={{ scale: 0.995 }}
                       className={[
-                        "shrink-0 w-14 h-14 flex items-center justify-center",
-                        "font-display text-[1.5rem] leading-none",
-                        "transition-colors duration-200",
+                        "group relative w-full text-left px-7 py-[1.1rem] transition-colors duration-200 cursor-pointer",
+                        "flex items-center gap-5",
                         isActive
-                          ? "bg-red text-white"
-                          : "bg-carbon text-dark-gray group-hover:bg-[#222] group-hover:text-gray",
+                          ? "bg-[#1c1c1c] border-l-2 border-red"
+                          : "bg-charcoal hover:bg-[#181818] border-l-2 border-transparent",
                       ].join(" ")}
-                      aria-hidden="true"
+                      aria-pressed={isActive}
                     >
-                      {trainer.name.split(" ").map((n) => n[0]).join("")}
-                    </div>
-
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <p className={[
-                        "font-display text-[1.5rem] leading-none tracking-[0.04em] mb-[3px] transition-colors duration-200",
-                        isActive ? "text-white" : "text-gray group-hover:text-white",
-                      ].join(" ")}>
-                        {trainer.name.toUpperCase()}
-                      </p>
-                      <p className="font-condensed text-[0.72rem] tracking-[0.15em] uppercase text-red mb-2">
-                        {trainer.role} · {trainer.experience} Yrs
-                      </p>
-                      <div className="flex flex-wrap gap-[5px]">
-                        {trainer.specialisms.map((s) => (
-                          <span
-                            key={s}
-                            className="font-condensed text-[0.6rem] tracking-[0.1em] uppercase text-gray px-[8px] py-[3px] border border-dark-gray"
-                          >
-                            {s}
-                          </span>
-                        ))}
+                      {/* Initials avatar */}
+                      <div
+                        className={[
+                          "shrink-0 w-11 h-11 flex items-center justify-center",
+                          "font-display text-[1.3rem] leading-none",
+                          "transition-colors duration-200",
+                          isActive
+                            ? "bg-red text-white"
+                            : "bg-carbon text-dark-gray group-hover:bg-[#222] group-hover:text-gray",
+                        ].join(" ")}
+                        aria-hidden="true"
+                      >
+                        {trainer.name.split(" ").map((n) => n[0]).join("")}
                       </div>
-                    </div>
 
-                    {/* Active arrow */}
-                    <svg
-                      width="16" height="16" viewBox="0 0 24 24"
-                      fill="none" stroke="currentColor" strokeWidth="2"
-                      aria-hidden="true"
-                      className={[
-                        "shrink-0 transition-all duration-200",
-                        isActive ? "text-red opacity-100" : "text-gray opacity-0 group-hover:opacity-40",
-                      ].join(" ")}
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </motion.button>
-                );
-              })}
+                      {/* Info */}
+                      <div className="flex-1 min-w-0">
+                        <p className={[
+                          "font-display text-[1.35rem] leading-none tracking-[0.04em] mb-[3px] transition-colors duration-200",
+                          isActive ? "text-white" : "text-gray group-hover:text-white",
+                        ].join(" ")}>
+                          {trainer.name.toUpperCase()}
+                        </p>
+                        <p className="font-condensed text-[0.7rem] tracking-[0.15em] uppercase text-red">
+                          {trainer.role} · {trainer.experience} Yrs
+                        </p>
+                      </div>
+
+                      {/* Active arrow */}
+                      <svg
+                        width="14" height="14" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" strokeWidth="2"
+                        aria-hidden="true"
+                        className={[
+                          "shrink-0 transition-all duration-200",
+                          isActive ? "text-red opacity-100" : "text-gray opacity-0 group-hover:opacity-40",
+                        ].join(" ")}
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </motion.button>
+                  );
+                })}
+              </div>
+
+              {/* Bottom fade — hints that more trainers are scrollable */}
+              {trainers.length > 4 && (
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-0 left-0 right-0 h-12"
+                  style={{
+                    background: "linear-gradient(to bottom, transparent, var(--black))",
+                  }}
+                />
+              )}
             </div>
 
           </div>
