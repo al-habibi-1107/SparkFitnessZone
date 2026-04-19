@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import TrialForm          from "./TrialForm";
 
 export const metadata: Metadata = {
   title: "Book a Free Trial",
@@ -38,8 +39,8 @@ export default function BookPage() {
             </h1>
             <p className="font-body text-[1rem] font-light leading-[1.75] text-offwhite max-w-[440px]">
               Come see the facility, meet the team, and experience the difference — before
-              spending a single rupee. Pick a slot below and we&apos;ll have a trainer
-              ready for you.
+              spending a single rupee. Fill in your details and we&apos;ll call you to confirm
+              your slot.
             </p>
           </div>
 
@@ -62,13 +63,9 @@ export default function BookPage() {
         </div>
       </section>
 
-      {/* ── Cal.com scheduling iframe ───────────────────────────────── */}
-      <div className="flex-1 bg-black">
-        <iframe
-          src={process.env.NEXT_PUBLIC_CALCOM_URL}
-          className="w-full min-h-[800px] h-full border-0"
-          title="Schedule a session at Spark Fitness Zone"
-        />
+      {/* ── Form ───────────────────────────────────────────────────── */}
+      <div className="flex-1 bg-black px-[5vw] py-16">
+        <TrialForm />
       </div>
 
     </div>

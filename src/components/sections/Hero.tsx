@@ -43,7 +43,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-contain object-center"
+          className="object-cover object-center"
         />
       </div>
 
