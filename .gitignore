@@ -44,3 +44,7 @@ next-env.d.ts
 .claude/cache/
 
 /reference/
+
+# Extra
+
+/extra_details.txt
