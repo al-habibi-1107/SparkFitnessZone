@@ -8,25 +8,25 @@ import { motion } from "framer-motion";
 const SERVICES = [
   {
     num: "01",
-    image: "/assets/services/fat-loss.jpg",
+    image: "/assets/fatloss_1.jpg",
     name: "FAT LOSS\nPROGRAMME",
     desc: "A results-first approach combining metabolic conditioning, personalised caloric targets, and weekly check-ins. Designed for sustainable, visible fat loss — not crash diets.",
   },
   {
     num: "02",
-    image: "/assets/services/bodybuilding.jpg",
+    image: "/assets/bodybuilding_1.jpg",
     name: "BODY-\nBUILDING",
     desc: "Periodised strength and hypertrophy programming built around your schedule and recovery capacity. Compete, or just look the part — we train both.",
   },
   {
     num: "03",
-    image: "/assets/services/hormone-therapy.jpg",
+    image: "/assets/hormone_1.jpg",
     name: "HORMONE\nTHERAPY",
     desc: "Supervised hormone optimisation for performance and wellness. Conducted by certified practitioners with ongoing blood work and monitoring protocols.",
   },
   {
     num: "04",
-    image: "/assets/services/diet-plans.jpg",
+    image: "/assets/diet_1.jpg",
     name: "CUSTOM\nDIET PLANS",
     desc: "Macro-calibrated, lifestyle-compatible meal plans crafted by our in-house nutritionist. Updated fortnightly based on your progress and biofeedback.",
   },
