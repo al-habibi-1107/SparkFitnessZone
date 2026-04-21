@@ -54,7 +54,7 @@ const PLAN_CONFIGS = [
     name:          "Quarterly Plan",
     period:        "Billed Every 3 Months — Save 20%",
     suffix:        "/qtr",
-    fallbackPrice: "₹3,599",
+    fallbackPrice: "₹3,499",
     featured:      true,
     badge:         "Most Popular",
     features: [
