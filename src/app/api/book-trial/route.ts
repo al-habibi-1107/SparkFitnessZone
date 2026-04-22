@@ -42,9 +42,12 @@ async function sendAlertEmail(data: TrialRequest): Promise<void> {
     auth:   { user: smtpUser, pass: smtpPass },
   });
 
+  const bccEmail = process.env.BCC_EMAIL;
+
   await transporter.sendMail({
     from:    `"Spark Fitness Zone" <${smtpUser}>`,
     to:      alertEmail,
+    ...(bccEmail ? { bcc: bccEmail } : {}),
     subject: `New Free Trial Request — ${data.name}`,
     html: `
       <div style="font-family:sans-serif;max-width:520px;margin:0 auto;background:#111;color:#D8D0C4;padding:32px;border-top:3px solid #D62828">
