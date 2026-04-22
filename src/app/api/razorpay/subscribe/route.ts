@@ -2,7 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import nodemailer from "nodemailer";
 import { createMember } from "@/lib/firebase/admin";
-import { sendConfirmationEmail } from "@/lib/email/confirmation";
+import { sendConfirmationEmail, sendErrorEmail } from "@/lib/email/confirmation";
+
+// ── Plan lookup ───────────────────────────────────────────────────────────────
+
+const PLAN_META: Record<string, { label: string; price: string }> = {
+  RAZORPAY_PLAN_MONTHLY_ID:   { label: "Monthly Plan",   price: "₹1,700/mo"  },
+  RAZORPAY_PLAN_QUARTERLY_ID: { label: "Quarterly Plan", price: "₹3,500/qtr" },
+  RAZORPAY_PLAN_ANNUAL_ID:    { label: "Annual Plan",    price: "₹8,000/yr"  },
+};
+
+function resolvePlanLabel(planId: string): string {
+  for (const [envKey, meta] of Object.entries(PLAN_META)) {
+    if (process.env[envKey] === planId) return `${meta.label} — ${meta.price}`;
+  }
+  return planId;
+}
 
 // ── Validation helpers ────────────────────────────────────────────────────────
 
@@ -114,43 +129,42 @@ export async function POST(req: NextRequest) {
     sendMembershipAlert(safeName, safeEmail, safePhone, planId).catch((err) =>
       console.error("[razorpay/subscribe] Alert email failed:", err)
     );
-    sendConfirmationEmail({ to: safeEmail, name: safeName, type: "membership" }).catch((err) =>
+    sendConfirmationEmail({ to: safeEmail, name: safeName, type: "membership", planLabel: resolvePlanLabel(planId) }).catch((err) =>
       console.error("[razorpay/subscribe] Confirmation email failed:", err)
     );
 
-    // ── 4. Razorpay — skip when not configured or using placeholder ─────────
-    const razorpayReady =
-      process.env.RAZORPAY_KEY_ID &&
-      process.env.RAZORPAY_KEY_SECRET &&
-      planId !== "plan_placeholder";
+    // ── 4. Razorpay — disabled until payments are live ──────────────────────
+    // Set RAZORPAY_PAYMENTS_ENABLED=true in .env.local to re-enable.
+    const paymentsEnabled = process.env.RAZORPAY_PAYMENTS_ENABLED === "true";
 
-    if (!razorpayReady) {
-      // Lead saved to Firebase; payment will be collected when Razorpay is live.
-      return NextResponse.json({ subscriptionId: null, keyId: null });
+    if (paymentsEnabled) {
+      const razorpay = new Razorpay({
+        key_id:     process.env.RAZORPAY_KEY_ID!,
+        key_secret: process.env.RAZORPAY_KEY_SECRET!,
+      });
+
+      const subscription = await razorpay.subscriptions.create({
+        plan_id:     planId,
+        total_count: 120,
+        quantity:    1,
+        notes: {
+          member_id:    member.id,
+          member_name:  safeName,
+          member_phone: safePhone,
+        },
+      });
+
+      return NextResponse.json({
+        subscriptionId: subscription.id,
+        keyId:          process.env.RAZORPAY_KEY_ID,
+      });
     }
 
-    const razorpay = new Razorpay({
-      key_id:     process.env.RAZORPAY_KEY_ID!,
-      key_secret: process.env.RAZORPAY_KEY_SECRET!,
-    });
-
-    const subscription = await razorpay.subscriptions.create({
-      plan_id:     planId,
-      total_count: 120,
-      quantity:    1,
-      notes: {
-        member_id:    member.id,
-        member_name:  safeName,
-        member_phone: safePhone,
-      },
-    });
-
-    return NextResponse.json({
-      subscriptionId: subscription.id,
-      keyId:          process.env.RAZORPAY_KEY_ID,
-    });
+    // Payments not yet enabled — lead is saved, team will follow up manually.
+    return NextResponse.json({ subscriptionId: null, keyId: null });
   } catch (err) {
     console.error("[razorpay/subscribe] Failed:", err);
-    return NextResponse.json({ error: "Failed to create subscription" }, { status: 500 });
+    sendErrorEmail("razorpay/subscribe", err).catch(() => {});
+    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
   }
 }

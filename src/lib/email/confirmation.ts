@@ -1,5 +1,40 @@
 import nodemailer from "nodemailer";
 
+// ── Error alert ───────────────────────────────────────────────────────────────
+
+export async function sendErrorEmail(context: string, err: unknown): Promise<void> {
+  const helpEmail = process.env.HELP_EMAIL;
+  const smtpUser  = process.env.SMTP_USER;
+  const smtpPass  = process.env.SMTP_PASS;
+  if (!helpEmail || !smtpUser || !smtpPass) return;
+
+  const message = err instanceof Error ? `${err.message}\n\n${err.stack ?? ""}` : String(err);
+  const ts      = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+
+  const transporter = nodemailer.createTransport({
+    host:   process.env.SMTP_HOST ?? "smtp.gmail.com",
+    port:   Number(process.env.SMTP_PORT ?? 587),
+    secure: false,
+    auth:   { user: smtpUser, pass: smtpPass },
+  });
+
+  await transporter.sendMail({
+    from:    `"Spark Fitness Zone [Error]" <${smtpUser}>`,
+    to:      helpEmail,
+    subject: `ERROR — ${context}`,
+    html: `
+      <div style="font-family:monospace;max-width:600px;margin:0 auto;background:#0d0d0d;color:#e0e0e0;padding:28px;border-top:3px solid #D62828;">
+        <h2 style="margin:0 0 6px 0;color:#D62828;font-size:1rem;text-transform:uppercase;letter-spacing:0.1em;">Server Error</h2>
+        <p style="margin:0 0 20px 0;color:#666;font-size:0.8rem;">${ts}</p>
+        <p style="margin:0 0 8px 0;color:#888;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;">Context</p>
+        <p style="margin:0 0 20px 0;padding:10px 14px;background:#1a1a1a;border-left:3px solid #D62828;color:#fff;font-size:0.9rem;">${context}</p>
+        <p style="margin:0 0 8px 0;color:#888;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;">Error</p>
+        <pre style="margin:0;padding:14px;background:#1a1a1a;color:#e0e0e0;font-size:0.8rem;white-space:pre-wrap;word-break:break-all;">${message}</pre>
+      </div>
+    `,
+  });
+}
+
 // ── Shared transporter factory ────────────────────────────────────────────────
 
 export function createTransporter() {

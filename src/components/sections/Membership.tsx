@@ -38,7 +38,7 @@ const PLAN_CONFIGS = [
     name:          "Monthly Plan",
     period:        "Billed Monthly",
     suffix:        "/mo",
-    fallbackPrice: "₹1,499",
+    fallbackPrice: "₹1,700",
     featured:      false,
     badge:         null,
     features: [
@@ -52,9 +52,9 @@ const PLAN_CONFIGS = [
   {
     envKey:        "RAZORPAY_PLAN_QUARTERLY_ID",
     name:          "Quarterly Plan",
-    period:        "Billed Every 3 Months — Save 20%",
+    period:        "Billed Every 3 Months — Save 31%",
     suffix:        "/qtr",
-    fallbackPrice: "₹3,499",
+    fallbackPrice: "₹3,500",
     featured:      true,
     badge:         "Most Popular",
     features: [
@@ -69,9 +69,9 @@ const PLAN_CONFIGS = [
   {
     envKey:        "RAZORPAY_PLAN_ANNUAL_ID",
     name:          "Annual Plan",
-    period:        "Billed Annually — Save 37%",
+    period:        "Billed Annually — Save 61%",
     suffix:        "/yr",
-    fallbackPrice: "₹11,299",
+    fallbackPrice: "₹8,000",
     featured:      false,
     badge:         null,
     features: [

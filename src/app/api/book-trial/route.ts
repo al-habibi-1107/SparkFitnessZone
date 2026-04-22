@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse }  from "next/server";
 import nodemailer                     from "nodemailer";
-import { sendConfirmationEmail }      from "@/lib/email/confirmation";
+import { sendConfirmationEmail, sendErrorEmail } from "@/lib/email/confirmation";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -115,6 +115,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   results.forEach((r, i) => {
     if (r.status === "rejected") {
       console.error(`book-trial: step ${labels[i]} failed:`, r.reason);
+      sendErrorEmail(`book-trial / ${labels[i]}`, r.reason).catch(() => {});
     }
   });
 
