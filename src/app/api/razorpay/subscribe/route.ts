@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Razorpay from "razorpay";
 import nodemailer from "nodemailer";
 import { createMember } from "@/lib/firebase/admin";
+import { sendConfirmationEmail } from "@/lib/email/confirmation";
 
 // ── Validation helpers ────────────────────────────────────────────────────────
 
@@ -109,9 +110,12 @@ export async function POST(req: NextRequest) {
       phone: safePhone,
     });
 
-    // ── 2. Alert email (fire-and-forget) ────────────────────────────────────
+    // ── 2. Emails (fire-and-forget) ─────────────────────────────────────────
     sendMembershipAlert(safeName, safeEmail, safePhone, planId).catch((err) =>
-      console.error("[razorpay/subscribe] Email alert failed:", err)
+      console.error("[razorpay/subscribe] Alert email failed:", err)
+    );
+    sendConfirmationEmail({ to: safeEmail, name: safeName, type: "membership" }).catch((err) =>
+      console.error("[razorpay/subscribe] Confirmation email failed:", err)
     );
 
     // ── 4. Razorpay — skip when not configured or using placeholder ─────────

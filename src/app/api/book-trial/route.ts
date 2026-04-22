@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import nodemailer                    from "nodemailer";
+import { NextRequest, NextResponse }  from "next/server";
+import nodemailer                     from "nodemailer";
+import { sendConfirmationEmail }      from "@/lib/email/confirmation";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -107,12 +108,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const results = await Promise.allSettled([
     isFirebaseConfigured() ? saveToFirebase(entry) : Promise.resolve(),
     sendAlertEmail(entry),
+    sendConfirmationEmail({ to: entry.email, name: entry.name, type: "trial" }),
   ]);
 
-  // Log any failures server-side without blocking the success response
+  const labels = ["firebase", "alert-email", "confirmation-email"];
   results.forEach((r, i) => {
     if (r.status === "rejected") {
-      console.error(`book-trial: step ${i === 0 ? "firebase" : "email"} failed:`, r.reason);
+      console.error(`book-trial: step ${labels[i]} failed:`, r.reason);
     }
   });
 
