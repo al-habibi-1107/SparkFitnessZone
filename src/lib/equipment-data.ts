@@ -437,6 +437,323 @@ export const STATIC_EQUIPMENT: StaticEquipment[] = [
       "Spark Fitness Zone functional zone",
     ],
   },
+  {
+    slug:     "leg-extension",
+    name:     "Leg Extension Machine",
+    category: "strength",
+    shortDesc:
+      "A selectorised leg extension machine that isolates the quadriceps through a full arc of motion — the definitive finishing movement for quad definition and VMO development.",
+    description:
+      "The Leg Extension Machine at Spark Fitness Zone is the most direct way to isolate the quadriceps — specifically the rectus femoris, vastus lateralis, and VMO (vastus medialis oblique) — without any involvement from the glutes or hamstrings. Unlike compound movements such as squats and leg press, the leg extension places the entire resistance load exclusively on the quads through a fixed arc of motion from 90 degrees of knee flexion to full extension. " +
+      "This isolation quality makes it irreplaceable in two specific scenarios: first, as a pre-exhaustion tool before compound leg work to ensure maximum quad recruitment; second, as a finishing movement to drive blood and metabolic stress into the quads at the end of a leg session. The VMO — the teardrop-shaped muscle just above the inner knee — responds particularly well to the top portion of the extension arc, making this machine essential for aesthetic quad development. " +
+      "The selectorised weight stack allows precise load selection in small increments, and the adjustable back pad and ankle roller accommodate all leg lengths. Drop sets and high-rep pump sets (15–25 reps) work exceptionally well on this machine to maximise time under tension. At Spark Fitness Zone, the leg extension is paired with the leg curl as part of a balanced leg isolation circuit available to all members.",
+    muscleGroups: ["Quads", "Rectus Femoris", "VMO", "Vastus Lateralis"],
+    specs: [
+      { label: "Resistance Type",    value: "Selectorised weight stack" },
+      { label: "Range of Motion",    value: "0–90° knee extension arc" },
+      { label: "Back Pad",           value: "Adjustable position" },
+      { label: "Ankle Roller",       value: "Adjustable for all leg lengths" },
+      { label: "Weight Stack",       value: "Up to 100 kg" },
+      { label: "Grade",              value: "Commercial" },
+      { label: "Maintenance",        value: "Serviced Weekly" },
+    ],
+    benefits: [
+      "Isolates the quadriceps completely — no glute or hamstring involvement",
+      "VMO development at the top of the arc for aesthetic teardrop definition",
+      "Precise selectorised loading — ideal for drop sets and progressive overload",
+      "Safe for post-ACL rehab and knee strengthening protocols",
+      "Excellent pre-exhaust tool before compound leg movements",
+    ],
+    trainingTips: [
+      "For VMO activation, slow down the last 15° of extension and hold at the top for 1–2 seconds",
+      "Slightly toe-outward foot position increases VMO activation versus straight-ahead",
+      "Drop sets work particularly well — immediately reduce weight by 30% at failure and continue for 6–8 more reps",
+      "Do not lock out violently at the top — extend smoothly and control the eccentric for 3 seconds back down",
+    ],
+    seoTitle:       "Leg Extension Machine | Spark Fitness Zone Gym, Jamshedpur",
+    seoDescription: "Leg extension machine at Spark Fitness Zone Jamshedpur. Isolate and define your quads with selectorised resistance. Best leg day gym in Jharkhand.",
+    keywords: [
+      "leg extension machine Jamshedpur",
+      "quad isolation gym Jamshedpur",
+      "leg day machine Jamshedpur",
+      "VMO exercise gym Jamshedpur",
+      "strength training Jamshedpur",
+      "Spark Fitness Zone leg machine",
+      "gym Jharkhand",
+    ],
+  },
+  {
+    slug:     "chest-press-flat",
+    name:     "Chest Press Flat Machine",
+    category: "strength",
+    shortDesc:
+      "A selectorised flat chest press machine providing a stable pressing arc — ideal for chest hypertrophy, beginners learning pressing mechanics, and heavy drop sets.",
+    description:
+      "The Flat Chest Press Machine at Spark Fitness Zone delivers the mechanical advantage of a barbell bench press in a guided, joint-friendly format that is accessible to members of every experience level. The fixed pressing arc keeps the bar path consistent rep after rep, eliminating the stabilisation demand that causes technique breakdown under heavy free-weight loads — making it the ideal tool for training chest to true failure without a spotter. " +
+      "Unlike the flat barbell bench press, the machine chest press allows the hands to converge slightly at peak extension, producing a partial pec contraction at the top of the movement that free weights cannot replicate. This makes it an effective hypertrophy tool even for advanced lifters when programmed as a heavy compound movement or as a burnout finisher. The selectorised weight stack enables seamless weight changes between sets — critical for rest-pause, drop sets, and mechanical drop set protocols. " +
+      "Seat height adjustment aligns the handles with mid-chest level (the sternal head of the pectoralis major) to maximise primary muscle activation and protect the anterior deltoid from unnecessary stress. At Spark Fitness Zone, the flat chest press machine sits in the strength zone alongside the pec fly and cable crossover, enabling complete chest training circuits without moving across the facility. Available to all membership tiers.",
+    muscleGroups: ["Chest", "Pectoralis Major", "Anterior Deltoid", "Triceps"],
+    specs: [
+      { label: "Resistance Type",   value: "Selectorised weight stack" },
+      { label: "Press Arc",         value: "Flat / horizontal" },
+      { label: "Seat Adjustment",   value: "Height-adjustable, multiple positions" },
+      { label: "Grip",              value: "Neutral / pronated dual-position handles" },
+      { label: "Weight Stack",      value: "Up to 120 kg" },
+      { label: "Grade",             value: "Commercial" },
+      { label: "Maintenance",       value: "Serviced Weekly" },
+    ],
+    benefits: [
+      "Train chest to true failure without a spotter — safety built in",
+      "Consistent pressing arc eliminates technique breakdown under heavy loads",
+      "Slight hand convergence at top produces pec contraction free weights cannot match",
+      "Selectorised stack enables instant weight changes for drop sets",
+      "Adjustable seat ensures correct alignment for all body types",
+    ],
+    trainingTips: [
+      "Set seat height so handles are at mid-chest (nipple line) — too high shifts load to shoulders",
+      "Drive the handles together at full extension to maximise pec contraction rather than just locking out elbows",
+      "For a mechanical drop set: heavy load for 6 reps, immediately shift grip to neutral handles, continue for 6 more reps",
+      "Slow down the eccentric (return) to 3 seconds to maximise time under tension in the stretched position",
+    ],
+    seoTitle:       "Flat Chest Press Machine | Spark Fitness Zone Gym, Jamshedpur",
+    seoDescription: "Flat chest press machine at Spark Fitness Zone Jamshedpur. Build chest mass safely with guided pressing arc. Book a free trial at Jamshedpur's top gym.",
+    keywords: [
+      "chest press machine Jamshedpur",
+      "flat bench press machine Jamshedpur",
+      "chest workout gym Jamshedpur",
+      "pectoral machine Jamshedpur",
+      "strength training gym Jamshedpur",
+      "Spark Fitness Zone chest press",
+      "bodybuilding gym Jharkhand",
+    ],
+  },
+  {
+    slug:     "ab-crunches",
+    name:     "Ab Crunches Machine",
+    category: "strength",
+    shortDesc:
+      "A dedicated abdominal crunch machine with selectorised resistance — isolates the rectus abdominis with controlled spinal flexion for targeted core development.",
+    description:
+      "The Ab Crunches Machine at Spark Fitness Zone provides the most direct and effective overloaded resistance training for the rectus abdominis — the muscle responsible for the defined, visible six-pack aesthetic. Unlike floor crunches or sit-ups, the machine applies constant selectorised resistance throughout the entire spinal flexion arc, making it possible to progressively overload the abs just like any other muscle group. " +
+      "The pivot design guides the torso through a fixed spinal flexion arc, preventing hip flexors from taking over — the most common fault in floor-based ab work. This isolation quality means every repetition produces direct stimulus to the rectus abdominis and the obliques (which assist through spinal rotation), with zero lower back stress. The padded arm rests and head support ensure correct positioning from the first rep to the last. " +
+      "Visible abdominal development requires two things: low enough body fat percentage for the muscle to be visible, and sufficient muscle size and thickness to create definition. The Ab Crunches Machine addresses the second factor directly — progressive loading over 8–12 weeks builds genuine ab muscle thickness that becomes increasingly visible as body composition improves through the fat loss programmes at Spark Fitness Zone. " +
+      "Recommended as the final movement in any training session — 3–4 sets of 15–20 reps with a 2-second squeeze at peak contraction. Increasing the weight stack by 5 kg every 2–3 weeks ensures consistent progressive overload.",
+    muscleGroups: ["Rectus Abdominis", "Obliques", "Core"],
+    specs: [
+      { label: "Resistance Type",   value: "Selectorised weight stack" },
+      { label: "Movement Arc",      value: "Spinal flexion (crunch pattern)" },
+      { label: "Arm Rests",         value: "Padded, adjustable" },
+      { label: "Head Support",      value: "Built-in padded support" },
+      { label: "Weight Stack",      value: "Up to 80 kg" },
+      { label: "Grade",             value: "Commercial" },
+      { label: "Maintenance",       value: "Serviced Weekly" },
+    ],
+    benefits: [
+      "Progressive overload for abs — builds genuine muscle thickness, not just endurance",
+      "Eliminates hip flexor dominance common in floor crunches",
+      "Constant selectorised resistance throughout the full flexion arc",
+      "Zero lower back stress — safe daily use for all fitness levels",
+      "Builds the rectus abdominis thickness that creates visible six-pack definition",
+    ],
+    trainingTips: [
+      "Breathe out and squeeze hard at the peak of each crunch — hold for 1–2 seconds before releasing",
+      "Do not rush the eccentric (return) — control it for 3 seconds to maximise time under tension",
+      "Increase the weight stack by 5 kg when you can complete 20 clean reps with a 2-second squeeze",
+      "Superset with the pec fly or leg extension as a finisher — no rest needed between movements",
+    ],
+    seoTitle:       "Ab Crunches Machine | Spark Fitness Zone Gym, Jamshedpur",
+    seoDescription: "Ab crunches machine at Spark Fitness Zone Jamshedpur. Progressive overload for core strength and visible six-pack abs. Book a free trial today.",
+    keywords: [
+      "ab crunches machine Jamshedpur",
+      "abdominal machine gym Jamshedpur",
+      "six pack gym Jamshedpur",
+      "core workout machine Jamshedpur",
+      "ab training gym Jharkhand",
+      "Spark Fitness Zone abs machine",
+      "gym Jamshedpur core",
+    ],
+  },
+  {
+    slug:     "air-bike",
+    name:     "Air Bike",
+    category: "cardio",
+    shortDesc:
+      "A fan-resistance upright stationary bike delivering smooth, self-regulating cardio — ideal for steady-state Zone 2 training and interval conditioning.",
+    description:
+      "The Air Bike at Spark Fitness Zone is a commercial-grade fan resistance stationary cycle designed for a broad spectrum of cardiovascular training — from low-intensity Zone 2 aerobic sessions to high-intensity interval conditioning. Like all air-resistance equipment, the fan blade generates resistance in direct proportion to how hard you pedal: the faster you go, the more resistance is created. This means the bike automatically adapts to every fitness level without manual adjustment. " +
+      "The upright seating position provides a natural, comfortable cycling geometry that most members find intuitive from the first session. The large fan blade moves enough air to keep you cool during extended sessions, reducing perceived exertion during longer aerobic work. The console tracks RPM, calories, time, and distance in real time — giving you the data you need for structured heart rate zone training. " +
+      "At Spark Fitness Zone, the Air Bike is used as both a warm-up tool (5–10 minutes of easy spinning before resistance training) and as a primary cardio machine for fat loss programming. Its low-impact nature makes it particularly suitable for members with knee, hip, or ankle sensitivities who cannot run on the treadmill at higher intensities. For Zone 2 aerobic base building — the cornerstone of long-term cardiovascular health — the Air Bike is one of the most comfortable and effective options in the cardio zone.",
+    muscleGroups: ["Cardiovascular", "Quads", "Hamstrings", "Glutes", "Calves"],
+    specs: [
+      { label: "Resistance Type",    value: "Air (fan-based, self-regulating)" },
+      { label: "Seating Position",   value: "Upright" },
+      { label: "Console Metrics",    value: "RPM, Calories, Time, Distance" },
+      { label: "Drive",              value: "Pedal-only" },
+      { label: "Power Source",       value: "Self-powered (no electricity for resistance)" },
+      { label: "Frame",              value: "Heavy-gauge steel, commercial grade" },
+      { label: "Max User Weight",    value: "130 kg" },
+    ],
+    benefits: [
+      "Self-regulating resistance adapts to every fitness level automatically",
+      "Low-impact — zero stress on knees, hips, and ankles",
+      "Ideal for Zone 2 aerobic base building and fat-burning sessions",
+      "Natural cooling from fan airflow reduces perceived effort during long sessions",
+      "Effective warm-up tool — brings the body to working temperature in 5 minutes",
+    ],
+    trainingTips: [
+      "For Zone 2 aerobic training, maintain a pace where you can hold a conversation — typically 60–70% of your max heart rate",
+      "20-minute sessions at moderate steady-state intensity burn significant calories while remaining easy to recover from",
+      "Use as a warm-up at low resistance (easy spin) for 5 minutes before any resistance training session",
+      "For interval work, alternate 30 seconds of hard effort with 90 seconds of easy pedalling for 15–20 minutes",
+    ],
+    seoTitle:       "Air Bike | Cardio Zone, Spark Fitness Zone Jamshedpur",
+    seoDescription: "Air resistance bike at Spark Fitness Zone Jamshedpur. Low-impact cardio, Zone 2 training, and HIIT conditioning. Book a free trial at Jamshedpur's best gym.",
+    keywords: [
+      "air bike gym Jamshedpur",
+      "stationary bike Jamshedpur",
+      "cardio gym Jamshedpur",
+      "low impact cardio Jamshedpur",
+      "Zone 2 training Jamshedpur",
+      "Spark Fitness Zone cardio",
+      "cycling machine Jamshedpur",
+    ],
+  },
+  {
+    slug:     "stairmaster",
+    name:     "StairMaster",
+    category: "cardio",
+    shortDesc:
+      "A commercial stair-climbing machine that simulates continuous step climbing — delivering intense lower body cardio with superior glute and quad activation versus the treadmill.",
+    description:
+      "The StairMaster at Spark Fitness Zone is one of the most effective cardio machines for simultaneous fat loss and lower body conditioning. Unlike the treadmill or bike, stair climbing places the body in a hip-flexed position that directly loads the glutes and quads through a functional range of motion — producing both a cardiovascular stimulus and meaningful muscular work in the same session. This dual-effect makes it the preferred cardio tool for members focused on body recomposition. " +
+      "The revolving staircase design forces continuous, rhythmic step climbing at a pace you control — from a slow, deliberate 26 steps per minute for Zone 2 fat-burning work up to an aggressive 160+ steps per minute for high-intensity conditioning. The self-powered rotating steps never allow momentum or coasting, meaning every step requires active muscular effort. Grip the side rails lightly for balance only — leaning heavily reduces glute activation by up to 40% and shifts load to the arms. " +
+      "At Spark Fitness Zone, the StairMaster is heavily used in both the fat loss programme and the lower body development circuits. Fifteen minutes on the StairMaster at moderate intensity burns more calories than an equivalent treadmill walk, and produces significantly more glute and hamstring activation. For members who want to develop the glutes while maintaining cardiovascular fitness, it is the single best machine in the cardio zone.",
+    muscleGroups: ["Glutes", "Quads", "Hamstrings", "Calves", "Cardiovascular", "Core"],
+    specs: [
+      { label: "Step Type",          value: "Revolving staircase" },
+      { label: "Step Speed Range",   value: "26–162 steps per minute" },
+      { label: "Resistance Levels",  value: "1–20 (motorised)" },
+      { label: "Console Metrics",    value: "Steps, Floors, Calories, Heart Rate, Time" },
+      { label: "Heart Rate Monitor", value: "Contact grips + chest strap compatible" },
+      { label: "Grade",              value: "Commercial" },
+      { label: "Maintenance",        value: "Serviced Weekly" },
+    ],
+    benefits: [
+      "Burns more calories per minute than treadmill walking at equivalent effort",
+      "Superior glute and quad activation versus flat cardio machines",
+      "Functional stair-climbing motion transfers directly to everyday movement",
+      "Zone 2 fat-burning: sustain conversation pace for 20–40 min to maximise fat oxidation",
+      "Builds lower body endurance and muscular conditioning simultaneously",
+    ],
+    trainingTips: [
+      "Do NOT lean on the rails — light fingertip contact only. Leaning reduces glute activation by up to 40%",
+      "For glute emphasis, take larger, slower steps (one stair at a time, deliberate pace) rather than fast, shallow steps",
+      "Start at level 6–8 for your first session — the StairMaster is harder than it looks",
+      "Intervals: 60 seconds at level 14–16, 60 seconds at level 6 recovery × 10 rounds for maximum EPOC calorie burn",
+    ],
+    seoTitle:       "StairMaster | Cardio Zone, Spark Fitness Zone Jamshedpur",
+    seoDescription: "StairMaster stair-climber at Spark Fitness Zone Jamshedpur. Best cardio for glutes and fat loss. Book a free trial at Jharkhand's top gym.",
+    keywords: [
+      "stairmaster gym Jamshedpur",
+      "stair climber Jamshedpur",
+      "glute cardio gym Jamshedpur",
+      "fat loss gym Jamshedpur",
+      "cardio machine Jamshedpur",
+      "Spark Fitness Zone stairmaster",
+      "best gym Jharkhand cardio",
+    ],
+  },
+  {
+    slug:     "pullup-dips",
+    name:     "Pull-up & Dips Machine",
+    category: "strength",
+    shortDesc:
+      "An assisted pull-up and dips station with counterbalanced weight assistance — enabling every member to train pull-ups and tricep dips at the correct intensity regardless of bodyweight.",
+    description:
+      "The Pull-up and Dips Machine at Spark Fitness Zone is a counterbalanced assistance station that makes two of the most effective upper body exercises — the pull-up and the parallel bar dip — accessible to members at every strength level. A selectorised weight stack provides upward assistance through a knee pad: the more weight you select, the lighter the effective load you pull or push. This means a member who cannot yet perform a single unassisted pull-up can still train the full movement pattern through the correct range of motion, building the exact strength needed to eventually go unassisted. " +
+      "Pull-ups are widely considered the best back width exercise available — they recruit the lats, rhomboids, teres major, and rear deltoids through a full overhead pulling arc that no cable or machine can fully replicate. The wide-grip variant emphasises lat width; the neutral-grip (parallel) variant reduces shoulder stress and targets the lower lats more heavily; the supinated underhand grip (chin-up) brings the biceps strongly into the movement. " +
+      "Parallel bar dips are equally powerful for lower chest and tricep development — the forward lean angle determines which muscle is targeted most. An upright torso with elbows close isolates the triceps; a forward lean with elbows flared loads the lower chest (sternal head of pectoralis major). For advanced members, the dip station can be used unassisted or with a dipping belt for added load, making this machine useful across beginner to elite levels.",
+    muscleGroups: ["Lats", "Rhomboids", "Biceps", "Chest", "Triceps", "Rear Deltoids", "Core"],
+    specs: [
+      { label: "Type",                value: "Counterbalanced assisted pull-up / dip" },
+      { label: "Assistance Stack",    value: "Selectorised (5–80 kg assistance)" },
+      { label: "Pull-up Grips",       value: "Wide overhand, neutral parallel, underhand" },
+      { label: "Dip Handles",         value: "Parallel bars, shoulder-width" },
+      { label: "Knee Pad",            value: "Height-adjustable" },
+      { label: "Frame",               value: "Heavy-gauge steel" },
+      { label: "Grade",               value: "Commercial" },
+    ],
+    benefits: [
+      "Makes pull-ups and dips accessible to beginners — train the pattern before the strength is there",
+      "Progressive reduction of assistance builds toward full unassisted bodyweight reps",
+      "Three grip options target different portions of the back and arms",
+      "Dip angle variation shifts load between chest and triceps precisely",
+      "Available for unassisted or weighted use — suits every strength level",
+    ],
+    trainingTips: [
+      "Set assistance weight so you reach failure between 6–10 reps — reduce assistance by 5 kg every 2–3 weeks",
+      "Full range of motion is critical: start from dead hang (arms fully extended), pull chin above the bar",
+      "For tricep dips: keep torso upright and elbows pointing behind you — leaning forward makes it a chest exercise",
+      "Once you can do 3×10 with zero assistance, add a dipping belt with 5–10 kg for progressive overload",
+    ],
+    seoTitle:       "Pull-up & Dips Machine | Spark Fitness Zone Gym, Jamshedpur",
+    seoDescription: "Assisted pull-up and dips machine at Spark Fitness Zone Jamshedpur. Build back width and tricep strength from beginner to advanced. Book a free trial.",
+    keywords: [
+      "pull-up machine gym Jamshedpur",
+      "assisted pull-up Jamshedpur",
+      "dip machine gym Jamshedpur",
+      "back workout machine Jamshedpur",
+      "lat exercise gym Jamshedpur",
+      "Spark Fitness Zone pull-up",
+      "upper body gym Jharkhand",
+    ],
+  },
+  {
+    slug:     "pec-fly",
+    name:     "Pec Fly Machine",
+    category: "strength",
+    shortDesc:
+      "A plate-loaded or selectorised pec deck machine that isolates the chest through a fixed arc, delivering peak contraction at the midpoint for maximum pectoral hypertrophy.",
+    description:
+      "The Pec Fly Machine at Spark Fitness Zone is a dedicated chest isolation machine engineered to target the pectoralis major with near-zero involvement from the triceps or front deltoids — making it one of the most effective tools for building chest width and thickness when used alongside compound pressing movements. " +
+      "Unlike dumbbell flyes, the pec deck maintains constant resistance throughout the entire range of motion, delivering maximum tension at the fully contracted midpoint position where free weights go slack. This sustained tension through peak contraction is a primary driver of muscle hypertrophy and the reason the pec fly remains a staple in bodybuilding programmes at every level. " +
+      "The adjustable seat height ensures correct alignment of the shoulder joint with the machine's pivot axis — essential for reducing rotator cuff stress and isolating the chest rather than the anterior deltoid. The padded arm rests allow for both forearm-pad and handle-grip variations, enabling you to shift emphasis between the sternal (lower/middle) and clavicular (upper) heads of the pectoralis major. " +
+      "Recommended as a finishing movement after compound pressing (bench press or machine press), the pec fly is particularly effective for achieving a deep muscle pump and establishing the mind-muscle connection that translates to better recruitment during heavy compound lifts. Three to four sets of 12–15 reps at moderate load, with a two-second squeeze at midpoint, produces optimal hypertrophic stimulus.",
+    muscleGroups: ["Chest", "Pectoralis Major", "Anterior Deltoid", "Serratus Anterior"],
+    specs: [
+      { label: "Resistance Type",   value: "Selectorised weight stack" },
+      { label: "Range of Motion",   value: "180° arc, adjustable start angle" },
+      { label: "Seat Adjustment",   value: "Height-adjustable, 6 positions" },
+      { label: "Arm Attachment",    value: "Forearm pad + handle grip options" },
+      { label: "Weight Stack",      value: "Up to 80 kg" },
+      { label: "Frame",             value: "Heavy-gauge steel, commercial grade" },
+    ],
+    benefits: [
+      "Constant tension through full range of motion — no slack at peak contraction",
+      "Eliminates tricep involvement, forcing the chest to work in complete isolation",
+      "Safe shoulder-friendly arc reduces rotator cuff stress versus free-weight flyes",
+      "Ideal finishing movement to achieve maximum chest pump and mind-muscle connection",
+      "Adjustable alignment accommodates all body types for correct joint tracking",
+    ],
+    trainingTips: [
+      "Set the seat so your elbows align with the machine's pivot point — incorrect height shifts load onto the shoulders",
+      "Use a two-second squeeze at the midpoint (fully closed position) to maximise time under tension",
+      "Do not let the pads fly back uncontrolled — use a 3-second eccentric (opening) for maximum hypertrophic benefit",
+      "Keep your back flat against the pad throughout — arching the lower back reduces chest activation",
+      "Superset with flat or incline machine press for a complete chest finisher at the end of push day",
+    ],
+    seoTitle:       "Pec Fly Machine — Chest Isolation | Spark Fitness Zone Jamshedpur",
+    seoDescription: "Pec deck fly machine at Spark Fitness Zone Jamshedpur. Isolate and build chest width with constant-tension resistance for maximum pectoral hypertrophy.",
+    keywords: [
+      "pec fly machine Jamshedpur",
+      "pec deck gym Jamshedpur",
+      "chest isolation machine Jamshedpur",
+      "chest workout gym Jamshedpur",
+      "bodybuilding gym Jamshedpur",
+      "pectoral machine Jharkhand",
+      "Spark Fitness Zone chest machine",
+    ],
+  },
 ];
 
 // ── Lookup helpers ─────────────────────────────────────────────────────────────
@@ -463,3 +780,20 @@ export function getRelatedEquipment(currentSlug: string, limit = 3): StaticEquip
 export function getAllSlugs(): string[] {
   return STATIC_EQUIPMENT.map((e) => e.slug);
 }
+
+// Local images for equipment that has a photo in /public/assets/equipments/
+export const EQUIPMENT_LOCAL_IMAGES: Record<string, string> = {
+  "smith-machine":       "/assets/equipments/smith_machine.png",
+  "technogym-treadmill": "/assets/equipments/treadmill.png",
+  "leg-press-machine":   "/assets/equipments/ledg_press.png",
+  "assault-bike":        "/assets/equipments/assault_bike.png",
+  "leg-extension":       "/assets/equipments/leg_extension.png",
+  "chest-press-flat":    "/assets/equipments/chest_press_flat.png",
+  "ab-crunches":         "/assets/equipments/ab_crunches.png",
+  "air-bike":            "/assets/equipments/air_bike.png",
+  "pec-fly":             "/assets/equipments/pec_fly.png",
+  "cable-crossover":     "/assets/equipments/cable_cross.png",
+  "stairmaster":         "/assets/equipments/stairmaster.png",
+  "pullup-dips":         "/assets/equipments/pullup_dips_machine.png",
+  "rowing-machine":      "/assets/equipments/rowing_machine.png",
+};

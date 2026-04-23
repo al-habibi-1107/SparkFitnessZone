@@ -1,7 +1,7 @@
 import { getAllEquipment } from "@/lib/sanity/queries";
 import { urlForImage } from "@/lib/sanity/image";
 import { isSanityConfigured } from "@/lib/sanity/client";
-import { STATIC_EQUIPMENT } from "@/lib/equipment-data";
+import { STATIC_EQUIPMENT, EQUIPMENT_LOCAL_IMAGES } from "@/lib/equipment-data";
 import EquipmentGrid, { type EquipmentCardData } from "@/components/ui/EquipmentGrid";
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -14,8 +14,12 @@ export default async function Equipment() {
     category: e.category,
     desc:     e.shortDesc,
     muscles:  e.muscleGroups,
-    imageUrl: null,
+    imageUrl: EQUIPMENT_LOCAL_IMAGES[e.slug] ?? null,
   }));
+
+  // Show equipment with photos first
+  items.sort((a, b) => (a.imageUrl ? 0 : 1) - (b.imageUrl ? 0 : 1));
+
   if (isSanityConfigured()) {
     try {
       const sanityDocs = await getAllEquipment();

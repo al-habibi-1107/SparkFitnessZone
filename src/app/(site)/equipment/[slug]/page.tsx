@@ -13,6 +13,7 @@ import {
   getEquipmentBySlug   as getStaticEquipment,
   getRelatedEquipment  as getStaticRelated,
   getAllSlugs           as getAllStaticSlugs,
+  EQUIPMENT_LOCAL_IMAGES,
   type StaticEquipment,
 } from "@/lib/equipment-data";
 import type { Equipment as SanityEquipment } from "@/lib/sanity/types";
@@ -109,7 +110,7 @@ async function resolveEquipment(slug: string): Promise<{ eq: PageEquipment; rela
       seoTitle:       staticEq.seoTitle,
       seoDescription: staticEq.seoDescription,
       keywords:       staticEq.keywords,
-      imageUrl:       null,
+      imageUrl:       EQUIPMENT_LOCAL_IMAGES[slug] ?? null,
       isSanity:       false,
     },
     related: staticRelated.map((r: StaticEquipment) => ({
@@ -117,7 +118,7 @@ async function resolveEquipment(slug: string): Promise<{ eq: PageEquipment; rela
       name:     r.name,
       category: r.category,
       desc:     r.shortDesc,
-      imageUrl: null,
+      imageUrl: EQUIPMENT_LOCAL_IMAGES[r.slug] ?? null,
     })),
   };
 }
@@ -248,7 +249,7 @@ export default async function EquipmentPage({ params }: Props) {
             alt={eq.name}
             fill priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-contain object-center px-8"
           />
         ) : (
           <>
@@ -565,20 +566,22 @@ export default async function EquipmentPage({ params }: Props) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark-gray">
               {related.map((item) => (
-                <Link
+                <div
                   key={item.slug}
-                  href={`/equipment/${item.slug}`}
-                  className="group block bg-charcoal hover:bg-[#1c1c1c] transition-colors duration-300"
+                  className="relative overflow-hidden bg-[#0e0e0e]"
+                  style={{ aspectRatio: "9/16" }}
                 >
-                  {/* Image / placeholder */}
-                  <div className="relative w-full overflow-hidden bg-[#181818]" style={{ aspectRatio: "16/9" }}>
+                  <Link
+                    href={`/equipment/${item.slug}`}
+                    className="group absolute inset-0"
+                  >
                     {item.imageUrl ? (
                       <Image
                         src={item.imageUrl}
                         alt={item.name}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -587,27 +590,33 @@ export default async function EquipmentPage({ params }: Props) {
                         </span>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent" />
-                    <span className="absolute top-3 left-3 font-condensed text-[0.6rem] tracking-[0.18em] uppercase text-red bg-black/70 px-[10px] py-[4px]">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(to top, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.7) 32%, rgba(8,8,8,0.15) 60%, transparent 100%)",
+                      }}
+                    />
+                    <span className="absolute top-4 left-4 font-condensed text-[0.6rem] tracking-[0.18em] uppercase text-red bg-black/70 px-[10px] py-[5px] backdrop-blur-sm">
                       {item.category.replace("-", " ")}
                     </span>
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="font-condensed text-[1rem] font-bold tracking-[0.06em] uppercase text-white mb-2 group-hover:text-red transition-colors duration-200">
-                      {item.name}
-                    </h3>
-                    <p className="font-body text-[0.8rem] font-light text-gray line-clamp-2 leading-[1.6]">
-                      {item.desc}
-                    </p>
-                    <div className="flex items-center gap-2 mt-3 font-condensed text-[0.68rem] tracking-[0.15em] uppercase text-red opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      View Details
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <h3 className="font-condensed text-[1.05rem] font-bold tracking-[0.06em] uppercase text-white mb-1 group-hover:text-red transition-colors duration-200">
+                        {item.name}
+                      </h3>
+                      <p className="font-body text-[0.78rem] font-light text-gray/90 line-clamp-2 leading-[1.55] mb-3">
+                        {item.desc}
+                      </p>
+                      <div className="flex items-center gap-2 font-condensed text-[0.68rem] tracking-[0.15em] uppercase text-red opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        View Details
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>

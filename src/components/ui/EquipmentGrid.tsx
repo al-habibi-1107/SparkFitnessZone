@@ -75,61 +75,68 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.35, delay: i * 0.04, ease: "easeOut" }}
+              style={{ aspectRatio: "9/16" }}
+              className="relative overflow-hidden bg-[#0e0e0e]"
             >
               <Link
                 href={`/equipment/${item.slug}`}
-                className="group block bg-charcoal hover:bg-[#1c1c1c] transition-colors duration-300 h-full"
+                className="group absolute inset-0"
               >
-                {/* Image */}
-                <div className="relative w-full overflow-hidden bg-[#181818]" style={{ aspectRatio: "16/9" }}>
-                  {item.imageUrl ? (
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    /* Placeholder when no Sanity image yet */
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="font-display text-[4rem] leading-none text-white/[0.04]">
-                        {item.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                  {/* Scrim */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent" aria-hidden="true" />
+                {/* Full-bleed portrait image */}
+                {item.imageUrl ? (
+                  <Image
+                    src={item.imageUrl}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="font-display leading-none text-white/[0.04]" style={{ fontSize: "30vw" }}>
+                      {item.name.charAt(0)}
+                    </span>
+                  </div>
+                )}
 
-                  {/* Category pill */}
-                  <span className="absolute top-3 left-3 font-condensed text-[0.6rem] tracking-[0.18em] uppercase text-red bg-black/70 px-[10px] py-[4px] backdrop-blur-sm">
-                    {item.category.replace("-", " ")}
-                  </span>
-                </div>
+                {/* Gradient scrim — heavy at bottom so text is always legible */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.7) 32%, rgba(8,8,8,0.15) 60%, transparent 100%)",
+                  }}
+                />
 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="font-condensed text-[1.1rem] font-bold tracking-[0.06em] uppercase text-white mb-2 group-hover:text-red transition-colors duration-200">
+                {/* Top-left category pill */}
+                <span className="absolute top-4 left-4 font-condensed text-[0.6rem] tracking-[0.18em] uppercase text-red bg-black/70 px-[10px] py-[5px] backdrop-blur-sm">
+                  {item.category.replace("-", " ")}
+                </span>
+
+                {/* Bottom overlay: name + desc + muscles + arrow */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="font-condensed text-[1.15rem] font-bold tracking-[0.06em] uppercase text-white mb-1 group-hover:text-red transition-colors duration-200">
                     {item.name}
                   </h3>
-                  <p className="font-body text-[0.82rem] font-light text-gray leading-[1.6] mb-4 line-clamp-2">
+                  <p className="font-body text-[0.78rem] font-light text-gray/90 leading-[1.55] mb-3 line-clamp-2">
                     {item.desc}
                   </p>
-                  <div className="flex flex-wrap gap-[0.4rem]">
-                    {item.muscles.map((m) => (
+
+                  <div className="flex flex-wrap gap-[0.35rem] mb-4">
+                    {item.muscles.slice(0, 3).map((m) => (
                       <span
                         key={m}
-                        className="font-condensed text-[0.6rem] tracking-[0.1em] uppercase text-gray px-[8px] py-[3px] border border-dark-gray"
+                        className="font-condensed text-[0.58rem] tracking-[0.1em] uppercase text-gray/80 px-[7px] py-[3px] border border-white/15"
                       >
                         {m}
                       </span>
                     ))}
                   </div>
 
-                  {/* Arrow */}
-                  <div className="flex items-center gap-2 mt-4 font-condensed text-[0.7rem] tracking-[0.15em] uppercase text-red opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <div className="flex items-center gap-2 font-condensed text-[0.68rem] tracking-[0.15em] uppercase text-red opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     View Details
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                   </div>
