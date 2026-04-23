@@ -21,7 +21,7 @@ const STATIC: TrainerOption[] = [
     role:        "Assistant Trainer",
     experience:  4,
     specialisms: ["Muscle Building", "Hypertrophy", "Certified Fitness"],
-    imageUrl:    null,
+    imageUrl:    "/assets/trainers/trainer_2.png",
   },
   {
     slug:        "bikash-kumar",
@@ -29,7 +29,7 @@ const STATIC: TrainerOption[] = [
     role:        "Assistant Trainer",
     experience:  3,
     specialisms: ["Fat Loss", "Overall Health", "Wellness"],
-    imageUrl:    null,
+    imageUrl:    "/assets/trainers/trainer_3.png",
   },
   {
     slug:        "faizan",

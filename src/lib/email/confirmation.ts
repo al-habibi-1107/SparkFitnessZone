@@ -166,7 +166,7 @@ export async function sendConfirmationEmail({ to, name, type, planLabel }: Confi
                 <tr>
                   <td align="center">
                     <p style="margin:0 0 16px 0;font-size:0.9rem;color:#aaa;text-align:center;">We are looking forward to seeing you push your limits.</p>
-                    <a href="https://maps.app.goo.gl/sparkfitness" style="display:inline-block;background:#D62828;color:#ffffff;text-decoration:none;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:14px 32px;border-radius:2px;">Get Directions</a>
+                    <a href="https://share.google/rvpHgGX6CVHHtQ3AE" style="display:inline-block;background:#D62828;color:#ffffff;text-decoration:none;font-size:0.8rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:14px 32px;border-radius:2px;">Get Directions</a>
                   </td>
                 </tr>
               </table>
