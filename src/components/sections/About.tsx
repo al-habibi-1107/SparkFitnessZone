@@ -66,7 +66,7 @@ export default function About() {
             {/* Image */}
             <div className="relative z-[1] aspect-[4/5] overflow-hidden">
               <Image
-                src="/assets/about_1.JPG"
+                src="/assets/gym_interior_1.jpeg"
                 alt="Spark Fitness Zone gym interior"
                 fill
                 sizes="(max-width: 1024px) 90vw, 45vw"

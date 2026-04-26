@@ -110,7 +110,7 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
                 />
 
                 {/* Top-left category pill */}
-                <span className="absolute top-4 left-4 font-condensed text-[0.6rem] tracking-[0.18em] uppercase text-red bg-black/70 px-[10px] py-[5px] backdrop-blur-sm">
+                <span className="absolute top-4 right-4 font-condensed text-[0.6rem] tracking-[0.18em] uppercase text-red bg-black/70 px-[10px] py-[5px] backdrop-blur-sm">
                   {item.category.replace("-", " ")}
                 </span>
 
