@@ -1,13 +1,15 @@
 import EnrolButton from "@/components/ui/EnrolButton";
+import { isSanityConfigured } from "@/lib/sanity/client";
+import { getAllMembershipPlans } from "@/lib/sanity/queries";
 
-// ── Razorpay plan fetch ───────────────────────────────────────────────────────
+// ── Razorpay live-price fetch ─────────────────────────────────────────────────
 
 interface RazorpayPlan {
   id: string;
   item: { amount: number; currency: string };
 }
 
-async function fetchPlan(planId: string | undefined): Promise<RazorpayPlan | null> {
+async function fetchRazorpayPlan(planId: string): Promise<RazorpayPlan | null> {
   if (!planId) return null;
   try {
     const credentials = Buffer.from(
@@ -30,17 +32,18 @@ function formatAmount(plan: RazorpayPlan | null, fallback: string): string {
   return `₹${(plan.item.amount / 100).toLocaleString("en-IN")}`;
 }
 
-// ── Plan config ───────────────────────────────────────────────────────────────
+// ── Static fallback plan configs ──────────────────────────────────────────────
 
-const PLAN_CONFIGS = [
+const STATIC_PLANS = [
   {
-    envKey:        "RAZORPAY_PLAN_MONTHLY_ID",
+    _id:           "monthly-static",
     name:          "Monthly Plan",
-    period:        "Billed Monthly",
-    suffix:        "/mo",
-    fallbackPrice: "₹1,700",
-    featured:      false,
-    badge:         null,
+    priceSuffix:   "/mo",
+    billingNote:   "Billed Monthly",
+    priceDisplay:  "₹1,700",
+    isFeatured:    false,
+    badge:         undefined as string | undefined,
+    razorpayPlanId: process.env.RAZORPAY_PLAN_MONTHLY_ID ?? "",
     features: [
       "Full gym access — all zones",
       "Locker & shower access",
@@ -50,13 +53,14 @@ const PLAN_CONFIGS = [
     ],
   },
   {
-    envKey:        "RAZORPAY_PLAN_QUARTERLY_ID",
+    _id:           "quarterly-static",
     name:          "Quarterly Plan",
-    period:        "Billed Every 3 Months — Save 31%",
-    suffix:        "/qtr",
-    fallbackPrice: "₹3,500",
-    featured:      true,
-    badge:         "Most Popular",
+    priceSuffix:   "/qtr",
+    billingNote:   "Billed Every 3 Months — Save 31%",
+    priceDisplay:  "₹3,500",
+    isFeatured:    true,
+    badge:         "Most Popular" as string | undefined,
+    razorpayPlanId: process.env.RAZORPAY_PLAN_QUARTERLY_ID ?? "",
     features: [
       "Everything in Monthly",
       "Custom diet plan included",
@@ -67,13 +71,14 @@ const PLAN_CONFIGS = [
     ],
   },
   {
-    envKey:        "RAZORPAY_PLAN_ANNUAL_ID",
+    _id:           "annual-static",
     name:          "Annual Plan",
-    period:        "Billed Annually — Save 61%",
-    suffix:        "/yr",
-    fallbackPrice: "₹8,000",
-    featured:      false,
-    badge:         null,
+    priceSuffix:   "/yr",
+    billingNote:   "Billed Annually — Save 61%",
+    priceDisplay:  "₹8,000",
+    isFeatured:    false,
+    badge:         undefined as string | undefined,
+    razorpayPlanId: process.env.RAZORPAY_PLAN_ANNUAL_ID ?? "",
     features: [
       "Everything in Quarterly",
       "Unlimited PT sessions",
@@ -84,15 +89,38 @@ const PLAN_CONFIGS = [
       "Free merchandise kit",
     ],
   },
-] as const;
+];
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default async function Membership() {
-  const plans = await Promise.all(
-    PLAN_CONFIGS.map((cfg) =>
-      fetchPlan(process.env[cfg.envKey as keyof NodeJS.ProcessEnv] as string | undefined),
-    ),
+  // Load plan configs — from Sanity if available, else static fallback
+  let planConfigs = STATIC_PLANS as typeof STATIC_PLANS;
+
+  if (isSanityConfigured()) {
+    try {
+      const docs = await getAllMembershipPlans();
+      if (docs.length > 0) {
+        planConfigs = docs.map((doc) => ({
+          _id:            doc._id,
+          name:           doc.name,
+          priceSuffix:    doc.priceSuffix,
+          billingNote:    doc.billingNote,
+          priceDisplay:   doc.priceDisplay,
+          isFeatured:     doc.isFeatured,
+          badge:          doc.badge,
+          razorpayPlanId: doc.razorpayPlanId,
+          features:       doc.features,
+        }));
+      }
+    } catch {
+      // fall through to static
+    }
+  }
+
+  // Fetch live prices from Razorpay in parallel
+  const razorpayPlans = await Promise.all(
+    planConfigs.map((cfg) => fetchRazorpayPlan(cfg.razorpayPlanId)),
   );
 
   return (
@@ -121,18 +149,16 @@ export default async function Membership() {
 
         {/* ── Plans grid ─────────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-14">
-          {PLAN_CONFIGS.map((cfg, i) => {
-            const plan   = plans[i];
-            const planId = (process.env[cfg.envKey as keyof NodeJS.ProcessEnv] as string | undefined) ?? "plan_placeholder";
-            const price  = formatAmount(plan, cfg.fallbackPrice);
+          {planConfigs.map((cfg, i) => {
+            const price = formatAmount(razorpayPlans[i], cfg.priceDisplay);
 
             return (
               <div
-                key={cfg.name}
+                key={cfg._id}
                 className={[
                   "relative p-10 border transition-all duration-300",
                   "hover:-translate-y-[6px]",
-                  cfg.featured
+                  cfg.isFeatured
                     ? "bg-[#161616] border-red"
                     : "bg-carbon border-dark-gray hover:border-red/40",
                 ].join(" ")}
@@ -152,12 +178,12 @@ export default async function Membership() {
                 {/* Price */}
                 <div className="font-display text-[3.5rem] leading-none tracking-[0.02em] text-white mb-[0.3rem]">
                   {price}{" "}
-                  <span className="font-condensed text-[1rem] text-gray">{cfg.suffix}</span>
+                  <span className="font-condensed text-[1rem] text-gray">{cfg.priceSuffix}</span>
                 </div>
 
                 {/* Period */}
                 <p className="font-condensed text-[0.78rem] tracking-[0.1em] uppercase text-red mb-6">
-                  {cfg.period}
+                  {cfg.billingNote}
                 </p>
 
                 {/* Divider */}
@@ -177,12 +203,12 @@ export default async function Membership() {
                 </ul>
 
                 <EnrolButton
-                  planId={planId}
+                  planId={cfg.razorpayPlanId}
                   planName={cfg.name}
                   price={price}
-                  period={cfg.period}
+                  period={cfg.billingNote}
                   features={cfg.features}
-                  featured={cfg.featured}
+                  featured={cfg.isFeatured}
                 />
               </div>
             );

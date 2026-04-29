@@ -1,7 +1,7 @@
 import { getSanityClient } from "./client";
-import type { Equipment, Trainer, Review, Service, SiteSettings } from "./types";
+import type { Equipment, Trainer, Review, Service, SiteSettings, MembershipPlan } from "./types";
 
-export type { Equipment, Trainer, Review, Service, SiteSettings } from "./types";
+export type { Equipment, Trainer, Review, Service, SiteSettings, MembershipPlan } from "./types";
 
 // ── Site Settings ─────────────────────────────────────────────────────────────
 
@@ -91,6 +91,17 @@ const TRAINER_FIELDS = `
 export async function getAllTrainers(): Promise<Trainer[]> {
   return getSanityClient().fetch(
     `*[_type == "trainer"] | order(displayOrder asc){${TRAINER_FIELDS}}`
+  );
+}
+
+// ── Membership Plans ──────────────────────────────────────────────────────────
+
+export async function getAllMembershipPlans(): Promise<MembershipPlan[]> {
+  return getSanityClient().fetch(
+    `*[_type == "membershipPlan"] | order(displayOrder asc){
+      _id, _type, name, displayOrder, priceDisplay, priceSuffix,
+      billingNote, features, isFeatured, badge, razorpayPlanId
+    }`
   );
 }
 
