@@ -27,6 +27,15 @@ export type SanitySlug = {
   current: string;
 };
 
+// ─── Site Settings (singleton) ────────────────────────────────────────────────
+
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  heroImage?: SanityImageAsset;
+  aboutImage?: SanityImageAsset;
+};
+
 // ─── Service / Programme ──────────────────────────────────────────────────────
 
 export type Service = {
@@ -37,6 +46,7 @@ export type Service = {
   slug: string; // resolved: slug.current
   icon: string;
   description: string;
+  image?: SanityImageAsset;
 };
 
 // ─── Trainer ──────────────────────────────────────────────────────────────────

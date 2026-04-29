@@ -33,6 +33,13 @@ export const service = defineType({
       validation: (Rule) => Rule.required().max(4),
     }),
     defineField({
+      name: "image",
+      title: "Card Image",
+      type: "image",
+      options: { hotspot: true },
+      description: "Photo shown at the top of the service card on the homepage",
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "text",

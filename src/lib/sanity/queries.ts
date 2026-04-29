@@ -1,7 +1,34 @@
 import { getSanityClient } from "./client";
-import type { Equipment, Trainer, Review } from "./types";
+import type { Equipment, Trainer, Review, Service, SiteSettings } from "./types";
 
-export type { Equipment, Trainer, Review } from "./types";
+export type { Equipment, Trainer, Review, Service, SiteSettings } from "./types";
+
+// ── Site Settings ─────────────────────────────────────────────────────────────
+
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  return getSanityClient().fetch(
+    `*[_type == "siteSettings"][0]{ _id, _type, heroImage, aboutImage }`
+  );
+}
+
+// ── Services ──────────────────────────────────────────────────────────────────
+
+const SERVICE_FIELDS = `
+  _id,
+  _type,
+  orderNumber,
+  name,
+  "slug": slug.current,
+  icon,
+  description,
+  image
+`;
+
+export async function getAllServices(): Promise<Service[]> {
+  return getSanityClient().fetch(
+    `*[_type == "service"] | order(orderNumber asc){${SERVICE_FIELDS}}`
+  );
+}
 
 const EQUIPMENT_FIELDS = `
   _id,
