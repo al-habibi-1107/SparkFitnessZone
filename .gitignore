@@ -43,9 +43,14 @@ next-env.d.ts
 
 # ── Claude Code ───────────────────────────────────
 .claude/cache/
+.claude/worktrees/
+.claude/settings.local.json
+
+# ── Sanity ────────────────────────────────────────
+.sanity/
 
 /reference/
 
 # Extra
-
 extra_details.txt
+Thumbs.db
