@@ -109,6 +109,21 @@ export type MembershipPlan = {
   razorpayPlanId: string;
 };
 
+// ─── Why Us Slide ─────────────────────────────────────────────────────────────
+
+export type WhyUsSlide = {
+  _id: string;
+  _type: "whyUsSlide";
+  eyebrow: string;
+  head1: string;
+  head2: string;
+  body: string;
+  bullets: string[];
+  image: SanityImageAsset;
+  imageAlt: string;
+  displayOrder: number;
+};
+
 // ─── Customer Review ──────────────────────────────────────────────────────────
 
 export type ReviewRating = 3 | 4 | 5;

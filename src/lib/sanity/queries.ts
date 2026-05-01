@@ -1,7 +1,17 @@
 import { getSanityClient } from "./client";
-import type { Equipment, Trainer, Review, Service, SiteSettings, MembershipPlan } from "./types";
+import type { Equipment, Trainer, Review, Service, SiteSettings, MembershipPlan, WhyUsSlide } from "./types";
 
-export type { Equipment, Trainer, Review, Service, SiteSettings, MembershipPlan } from "./types";
+export type { Equipment, Trainer, Review, Service, SiteSettings, MembershipPlan, WhyUsSlide } from "./types";
+
+// ── Why Us Slides ─────────────────────────────────────────────────────────────
+
+export async function getWhyUsSlides(): Promise<WhyUsSlide[]> {
+  return getSanityClient().fetch(
+    `*[_type == "whyUsSlide"] | order(displayOrder asc){
+      _id, _type, eyebrow, head1, head2, body, bullets, image, imageAlt, displayOrder
+    }`
+  );
+}
 
 // ── Site Settings ─────────────────────────────────────────────────────────────
 
