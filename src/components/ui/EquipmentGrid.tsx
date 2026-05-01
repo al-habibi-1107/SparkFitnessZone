@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,26 +30,33 @@ const FILTERS: { label: string; value: Filter }[] = [
 
 const MOBILE_LIMIT = 4;
 
+function subscribeMQ(onChange: () => void) {
+  const mq = window.matchMedia("(min-width: 640px)");
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+const getMQSnapshot = () => window.matchMedia("(min-width: 640px)").matches;
+const getServerMQSnapshot = () => false;
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function EquipmentGrid({ items }: { items: EquipmentCardData[] }) {
-  const [active,    setActive]    = useState<Filter>("all");
-  const [expanded,  setExpanded]  = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [active,   setActive]   = useState<Filter>("all");
+  const [expanded, setExpanded] = useState(false);
 
-  // Track viewport width — avoids SSR/hydration mismatch
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 640px)");
-    setIsDesktop(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  const isDesktop = useSyncExternalStore(subscribeMQ, getMQSnapshot, getServerMQSnapshot);
 
-  // Collapse back to preview when filter changes on mobile
-  useEffect(() => {
+  // Collapse when viewport shrinks from desktop → mobile (during render, not in an effect)
+  const [prevIsDesktop, setPrevIsDesktop] = useState(false);
+  if (prevIsDesktop !== isDesktop) {
+    setPrevIsDesktop(isDesktop);
     if (!isDesktop) setExpanded(false);
-  }, [active, isDesktop]);
+  }
+
+  const handleFilterChange = (value: Filter) => {
+    setActive(value);
+    setExpanded(false);
+  };
 
   const visible = active === "all"
     ? items
@@ -72,7 +79,7 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
         {FILTERS.map(({ label, value }) => (
           <button
             key={value}
-            onClick={() => setActive(value)}
+            onClick={() => handleFilterChange(value)}
             className={[
               "font-condensed text-[0.72rem] tracking-[0.12em] uppercase",
               "px-5 py-2 border transition-all duration-200",
