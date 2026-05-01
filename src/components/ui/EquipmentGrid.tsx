@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,14 +28,36 @@ const FILTERS: { label: string; value: Filter }[] = [
   { label: "Functional",     value: "functional"  },
 ];
 
+const MOBILE_LIMIT = 4;
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function EquipmentGrid({ items }: { items: EquipmentCardData[] }) {
-  const [active, setActive] = useState<Filter>("all");
+  const [active,    setActive]    = useState<Filter>("all");
+  const [expanded,  setExpanded]  = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Track viewport width — avoids SSR/hydration mismatch
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  // Collapse back to preview when filter changes on mobile
+  useEffect(() => {
+    if (!isDesktop) setExpanded(false);
+  }, [active, isDesktop]);
 
   const visible = active === "all"
     ? items
     : items.filter((e) => e.category === active);
+
+  const displayItems  = isDesktop || expanded ? visible : visible.slice(0, MOBILE_LIMIT);
+  const hiddenCount   = visible.length - MOBILE_LIMIT;
+  const showMoreBtn   = !isDesktop && !expanded && hiddenCount > 0;
 
   return (
     <>
@@ -67,7 +89,7 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] bg-dark-gray">
         <AnimatePresence mode="popLayout">
-          {visible.map((item, i) => (
+          {displayItems.map((item, i) => (
             <motion.div
               key={item.slug}
               layout
@@ -99,7 +121,7 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
                   </div>
                 )}
 
-                {/* Gradient scrim — heavy at bottom so text is always legible */}
+                {/* Gradient scrim */}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0"
@@ -109,12 +131,12 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
                   }}
                 />
 
-                {/* Top-left category pill */}
+                {/* Category pill */}
                 <span className="absolute top-4 right-4 font-condensed text-[0.6rem] tracking-[0.18em] uppercase text-red bg-black/70 px-[10px] py-[5px] backdrop-blur-sm">
                   {item.category.replace("-", " ")}
                 </span>
 
-                {/* Bottom overlay: name + desc + muscles + arrow */}
+                {/* Bottom overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <h3 className="font-condensed text-[1.15rem] font-bold tracking-[0.06em] uppercase text-white mb-1 group-hover:text-red transition-colors duration-200">
                     {item.name}
@@ -146,6 +168,21 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
           ))}
         </AnimatePresence>
       </div>
+
+      {/* Show More — mobile only */}
+      {showMoreBtn && (
+        <div className="mt-8 flex justify-center sm:hidden">
+          <button
+            onClick={() => setExpanded(true)}
+            className="flex items-center gap-3 font-condensed text-[0.72rem] tracking-[0.2em] uppercase border border-dark-gray text-gray px-8 py-4 hover:border-red hover:text-white transition-all duration-200"
+          >
+            <span>Show {hiddenCount} More Machine{hiddenCount !== 1 ? "s" : ""}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </button>
+        </div>
+      )}
     </>
   );
 }
