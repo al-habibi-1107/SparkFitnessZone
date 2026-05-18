@@ -5,12 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const SPARK_WORDS = [
-  { word: "SPARK",    lang: "English"   },
-  { word: "स्पार्क", lang: "Hindi"     },
-  { word: "سپارک",   lang: "Urdu"      },
-  { word: "स्पार्क", lang: "Sanskrit"  },
-  { word: "سبارك",   lang: "Arabic"    },
-  { word: "SPARK",    lang: "French"    },
+  { word: "SPARK",      lang: "English"  },
+  { word: "स्पार्क",   lang: "Hindi"    },
+  { word: "سپارک",     lang: "Urdu"     },
+  { word: "स्पार्क",   lang: "Sanskrit" },
+  { word: "سبارك",     lang: "Arabic"   },
+  { word: "スパーク",   lang: "Japanese" },
+  { word: "스파크",     lang: "Korean"   },
+ 
 ] as const;
 
 const INTERVAL_MS = 2200;

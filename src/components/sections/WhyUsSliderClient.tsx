@@ -106,17 +106,15 @@ export default function WhyUsSliderClient({ slides }: { slides: SlideData[] }) {
 
   const [active, setActive] = useState(0);
   const [dir,    setDir]    = useState(1);
-  const [paused, setPaused] = useState(false);
 
-  // Auto-advance
+  // Auto-advance — always running; manual controls still work
   useEffect(() => {
-    if (paused) return;
     const id = setInterval(() => {
       setDir(1);
       setActive((a) => (a + 1) % data.length);
     }, INTERVAL_MS);
     return () => clearInterval(id);
-  }, [paused, data.length]);
+  }, [data.length]);
 
   function go(to: number) {
     setDir(to > active ? 1 : -1);
@@ -129,8 +127,6 @@ export default function WhyUsSliderClient({ slides }: { slides: SlideData[] }) {
     <section
       id="why-us"
       className="bg-black"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
     >
       <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
