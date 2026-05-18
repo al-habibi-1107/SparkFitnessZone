@@ -44,7 +44,7 @@ function reveal(delay = 0) {
 export default function AboutClient({ aboutImageUrl }: { aboutImageUrl: string }) {
   return (
     <section id="about" className="bg-charcoal">
-      <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
         {/* ── 2-col grid ──────────────────────────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[5rem] items-center">
@@ -78,7 +78,7 @@ export default function AboutClient({ aboutImageUrl }: { aboutImageUrl: string }
             {/* Red badge — years open */}
             <div
               className={[
-                "absolute bottom-[-1.5rem] right-[-1.5rem] z-[2]",
+                "absolute bottom-0 right-0 md:bottom-[-1.5rem] md:right-[-1.5rem] z-[2]",
                 "w-[110px] h-[110px] bg-red",
                 "flex flex-col items-center justify-center",
               ].join(" ")}

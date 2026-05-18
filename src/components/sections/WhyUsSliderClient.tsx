@@ -132,7 +132,7 @@ export default function WhyUsSliderClient({ slides }: { slides: SlideData[] }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
         {/* ── Section eyebrow ──────────────────────────────────── */}
         <div className="flex items-center gap-[0.6rem] mb-10">

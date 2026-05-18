@@ -17,7 +17,7 @@ export type ServiceCardData = {
 export default function ServicesClient({ services }: { services: ServiceCardData[] }) {
   return (
     <section id="services" className="bg-black">
-      <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
         {/* ── Section header ──────────────────────────────────────── */}
         <div className="flex justify-between items-end gap-8 flex-wrap mb-16">
@@ -108,8 +108,8 @@ function ServiceCard({ service, delay }: { service: ServiceCardData; delay: numb
       </div>
 
       {/* ── Card content ────────────────────────────────────────── */}
-      <div className="px-10 pt-8 pb-12">
-        <div className="font-display text-[2.2rem] leading-[1.05] tracking-[0.04em] text-white mb-3">
+      <div className="px-5 pt-6 pb-8 sm:px-10 sm:pt-8 sm:pb-12">
+        <div className="font-display text-[1.8rem] sm:text-[2.2rem] leading-[1.05] tracking-[0.04em] text-white mb-3">
           {lines.map((line, i) => (
             <span key={i}>
               {line}

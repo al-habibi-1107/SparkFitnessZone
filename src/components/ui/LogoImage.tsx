@@ -10,7 +10,7 @@ export default function LogoImage({ size = 36 }: { size?: number }) {
 
   return (
     <Image
-      src="/assets/logo.png"
+      src="/assets/logov2.png"
       alt="Spark Fitness Zone"
       width={size}
       height={size}
