@@ -43,7 +43,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="bg-black">
-      <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 mb-14">
@@ -120,7 +120,7 @@ export default function FAQ() {
                     transition={{ duration: 0.28, ease: "easeInOut" }}
                     className="overflow-hidden"
                   >
-                    <p className="pb-6 pr-10 font-body text-[0.95rem] font-light leading-[1.8] text-offwhite max-w-[720px]">
+                    <p className="pb-6 pr-4 md:pr-10 font-body text-[0.95rem] font-light leading-[1.8] text-offwhite max-w-[720px]">
                       {faq.a}
                     </p>
                   </motion.div>

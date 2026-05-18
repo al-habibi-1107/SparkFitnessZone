@@ -42,7 +42,7 @@ export default async function Equipment() {
 
   return (
     <section id="equipment" className="bg-black">
-      <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <div className="mb-14">

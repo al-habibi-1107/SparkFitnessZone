@@ -125,7 +125,7 @@ export default async function Membership() {
 
   return (
     <section id="membership" className="bg-charcoal">
-      <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <div>
@@ -156,7 +156,7 @@ export default async function Membership() {
               <div
                 key={cfg._id}
                 className={[
-                  "relative p-10 border transition-all duration-300",
+                  "relative p-6 md:p-10 border transition-all duration-300",
                   "hover:-translate-y-[6px]",
                   cfg.isFeatured
                     ? "bg-[#161616] border-red"

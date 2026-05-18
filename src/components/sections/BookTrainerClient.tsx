@@ -39,7 +39,7 @@ export default function BookTrainerClient({ trainers }: { trainers: TrainerOptio
         TRAIN 1-ON-1
       </span>
 
-      <div className="relative z-10 max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="relative z-10 max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-16 items-start">
 
           {/* ── Left: trainer selector ────────────────────────────── */}

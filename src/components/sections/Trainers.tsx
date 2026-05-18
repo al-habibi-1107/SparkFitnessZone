@@ -73,7 +73,7 @@ export default async function Trainers() {
 
   return (
     <section id="trainers" className="bg-carbon">
-      <div className="max-w-[1320px] mx-auto px-[5vw] py-[7rem]">
+      <div className="max-w-[1320px] mx-auto px-[5vw] py-16 md:py-[7rem]">
 
         {/* ── Header ─────────────────────────────────────────────── */}
         <div className="mb-14">
@@ -153,7 +153,7 @@ function TrainerCard({ trainer }: { trainer: TrainerCardData }) {
           {trainer.name.toUpperCase()}
         </h3>
 
-        <div className="flex flex-wrap gap-[0.4rem] opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-[0.35s]">
+        <div className="flex flex-wrap gap-[0.4rem] sm:opacity-0 sm:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-[0.35s]">
           {trainer.specs.map((spec) => (
             <span
               key={spec}
@@ -166,7 +166,7 @@ function TrainerCard({ trainer }: { trainer: TrainerCardData }) {
 
         <a
           href="/book"
-          className="inline-block mt-4 font-condensed text-[0.72rem] tracking-[0.15em] uppercase px-5 py-[10px] bg-red text-white opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-[0.35s] delay-[0.05s]"
+          className="inline-block mt-4 font-condensed text-[0.72rem] tracking-[0.15em] uppercase px-5 py-[10px] bg-red text-white sm:opacity-0 sm:translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-[0.35s] delay-[0.05s]"
         >
           Book a Session
         </a>

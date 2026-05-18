@@ -9,7 +9,7 @@ export default function BookingStrip() {
   return (
     <section
       id="booking"
-      className="relative overflow-hidden bg-red py-20 px-[5vw]"
+      className="relative overflow-hidden bg-red py-14 md:py-20 px-[5vw]"
     >
       {/* ── Large ghost text ────────────────────────────────────── */}
       <span
@@ -44,9 +44,10 @@ export default function BookingStrip() {
         <Link
           href="/book"
           className={[
-            "inline-flex items-center gap-3",
+            "inline-flex items-center justify-center gap-3",
             "font-condensed text-[0.9rem] tracking-[0.18em] uppercase font-bold",
             "px-10 py-5 bg-white text-red",
+            "w-full sm:w-auto",
             "hover:bg-black hover:text-white",
             "transition-all duration-200",
           ].join(" ")}

@@ -6,11 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import LogoImage from "@/components/ui/LogoImage";
 
 const NAV_LINKS = [
-  { label: "About",      href: "#about" },
-  { label: "Services",   href: "#services" },
-  { label: "Trainers",   href: "#trainers" },
-  { label: "Equipment",  href: "#equipment" },
-  { label: "Membership", href: "#membership" },
+  { label: "About",     href: "#about"     },
+  { label: "Services",  href: "#services"  },
+  { label: "Trainers",  href: "#trainers"  },
 ] as const;
 
 export default function Navbar() {
@@ -23,7 +21,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on resize to desktop
   useEffect(() => {
     const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
     window.addEventListener("resize", onResize);
@@ -34,65 +31,56 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Nav bar ─────────────────────────────────────────────────── */}
       <motion.nav
         initial={{ y: -72, opacity: 0 }}
-        animate={{ y: 0,   opacity: 1 }}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={[
           "fixed top-0 left-0 right-0 z-50",
           "flex items-center justify-between",
           "h-[72px] px-[5vw]",
-          "border-b border-white/[0.04]",
-          "backdrop-blur-[20px]",
-          "transition-[background] duration-300",
-          scrolled ? "bg-black/[0.97]" : "bg-black/85",
+          "transition-[background,backdrop-filter,border-color] duration-300",
+          scrolled
+            ? "bg-black/[0.97] backdrop-blur-[20px] border-b border-white/[0.06]"
+            : "bg-transparent",
         ].join(" ")}
       >
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-3 shrink-0"
+          className="flex items-center gap-2 shrink-0"
           onClick={closeMobileMenu}
         >
-          <LogoImage size={36} />
-          <span
-            className="font-display text-[1.9rem] leading-none tracking-[0.08em] text-white"
-          >
-            SPARK<span className="text-red">FITNESS ZONE</span>
+          <LogoImage size={32} />
+          <span className="font-display text-[1.55rem] leading-none tracking-[0.06em] text-white">
+            spark<span style={{ color: "#D62828" }}>fitness zone</span>
           </span>
         </Link>
 
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-10">
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-9">
           {NAV_LINKS.map((link, i) => (
             <motion.a
               key={link.href}
               href={link.href}
               initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0  }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.08 * i + 0.3, duration: 0.35, ease: "easeOut" }}
-              className="font-condensed text-[0.85rem] tracking-[0.12em] uppercase text-gray hover:text-white transition-colors duration-200"
+              className="font-condensed text-[0.85rem] tracking-[0.12em] uppercase text-white/70 hover:text-white transition-colors duration-200"
             >
               {link.label}
             </motion.a>
           ))}
 
-          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0  }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.08 * NAV_LINKS.length + 0.3, duration: 0.35, ease: "easeOut" }}
           >
             <a
               href="#membership"
-              className={[
-                "font-condensed text-[0.8rem] tracking-[0.14em] uppercase",
-                "px-6 py-[10px] bg-red text-white",
-                "hover:bg-red-hot hover:-translate-y-px",
-                "transition-[background,transform] duration-200",
-                "inline-block",
-              ].join(" ")}
+              className="font-condensed text-[0.8rem] tracking-[0.14em] uppercase px-5 py-[9px] text-white hover:-translate-y-px transition-transform duration-200 inline-block"
+              style={{ backgroundColor: "#D62828" }}
             >
               Join Now
             </a>
@@ -124,30 +112,23 @@ export default function Navbar() {
         </button>
       </motion.nav>
 
-      {/* ── Mobile menu ─────────────────────────────────────────────── */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             key="mobile-menu"
             initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0  }}
-            exit={{    opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22, ease: "easeOut" }}
-            className={[
-              "fixed top-[72px] left-0 right-0 z-40",
-              "flex flex-col gap-6",
-              "px-[5vw] py-8",
-              "bg-black/[0.97] backdrop-blur-[20px]",
-              "border-b border-dark-gray",
-              "md:hidden",
-            ].join(" ")}
+            className="fixed top-[72px] left-0 right-0 z-40 flex flex-col gap-6 px-[5vw] py-8 bg-black/[0.97] backdrop-blur-[20px] border-b border-white/[0.06] md:hidden"
           >
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={closeMobileMenu}
-                className="font-condensed text-[1rem] tracking-[0.12em] uppercase text-gray hover:text-white transition-colors duration-200"
+                className="font-condensed text-[1rem] tracking-[0.12em] uppercase text-white/60 hover:text-white transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -155,12 +136,8 @@ export default function Navbar() {
             <a
               href="#membership"
               onClick={closeMobileMenu}
-              className={[
-                "font-condensed text-[0.85rem] tracking-[0.14em] uppercase",
-                "px-6 py-[10px] bg-red text-white text-center",
-                "hover:bg-red-hot transition-colors duration-200",
-                "inline-block mt-2",
-              ].join(" ")}
+              className="font-condensed text-[0.85rem] tracking-[0.14em] uppercase px-6 py-[10px] text-white text-center hover:opacity-90 transition-opacity duration-200 inline-block mt-2"
+              style={{ backgroundColor: "#D62828" }}
             >
               Join Now
             </a>

@@ -104,8 +104,7 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.35, delay: i * 0.04, ease: "easeOut" }}
-              style={{ aspectRatio: "9/16" }}
-              className="relative overflow-hidden bg-[#0e0e0e]"
+              className="relative overflow-hidden bg-[#0e0e0e] aspect-[3/4] sm:aspect-[9/16]"
             >
               <Link
                 href={`/equipment/${item.slug}`}
