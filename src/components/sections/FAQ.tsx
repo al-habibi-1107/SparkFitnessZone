@@ -7,32 +7,64 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const FAQS = [
   {
+    q: "What is a PR in the gym?",
+    a: "PR stands for Personal Record — your best-ever performance on a lift or cardio effort. Hitting a new PR on your squat, bench press, or deadlift is one of the most motivating milestones in training. At Spark Fitness Zone, our trainers track your PRs from day one and programme your training specifically to help you break them consistently.",
+  },
+  {
+    q: "What should I eat before going to the gym?",
+    a: "A balanced pre-workout meal eaten 60–90 minutes before training gives you the best energy. Aim for a combination of complex carbs and protein: rice and dal, oats with banana, or whole grain toast with eggs. If you train early in the morning (gym jane se pehle kya khaye is one of the most common questions we get), a banana with peanut butter or a light protein smoothie works well for a quick fuel-up without feeling heavy.",
+  },
+  {
+    q: "What should I eat after the gym?",
+    a: "Post-workout nutrition is critical for muscle recovery. Commonly asked as 'gym karne ke baad kya khaye' or 'gym se aane ke baad kya khaye,' the answer is: eat a high-protein meal within 30–60 minutes of finishing your session. Good options include paneer, eggs, chicken, or a whey protein shake alongside rice or roti to replenish glycogen. Skipping this meal slows recovery significantly.",
+  },
+  {
+    q: "What is the best time to go to the gym?",
+    a: "The best time is the time you will consistently show up. Morning sessions (5–9 AM) improve daily energy and metabolic rate. Evening sessions (5–9 PM) tend to produce peak physical performance since your body temperature and muscle activation are highest then. Spark Fitness Zone is open from 5:00 AM to 11:00 PM every day, so you can train whenever you perform best.",
+  },
+  {
+    q: "What is cardio in the gym?",
+    a: "Cardio (cardiovascular exercise) is any sustained activity that raises your heart rate and strengthens your heart and lungs — treadmill running, cycling, elliptical, rowing, or jump rope. At Spark Fitness Zone, our dedicated cardio zone includes treadmills, stationary bikes, and ellipticals. Our trainers also programme high-intensity interval training (HIIT) for members who want faster fat loss alongside strength work.",
+  },
+  {
+    q: "Is the gym good for health?",
+    a: "Yes — regular strength and cardio training is one of the most evidence-backed investments you can make in your long-term health. It improves bone density, muscle mass, metabolism, hormonal health, cardiovascular function, and mental wellbeing. Whether your goal is weight management, strength, endurance, or stress reduction, a structured gym programme delivers measurable results. Every Spark Fitness Zone member gets a personalised plan built around their specific health goals.",
+  },
+  {
+    q: "Does gym training increase height?",
+    a: "After your growth plates close (typically around age 18–20), no exercise can increase your height. However, strength training dramatically improves posture, spinal alignment, and core strength, which can make you stand noticeably taller and more upright. For teenagers whose growth plates are still open, resistance training with correct form is safe — the old idea that lifting stunts growth has been thoroughly disproven by research.",
+  },
+  {
+    q: "Yoga or gym — which is better?",
+    a: "Both serve different goals. Gym training is superior for building muscle, increasing strength, and improving body composition. Yoga excels at flexibility, mobility, stress reduction, and mental clarity. At Spark Fitness Zone, we incorporate mobility and recovery work into all training programmes so you benefit from both. Many of our members combine gym training with yoga sessions and see faster overall progress as a result.",
+  },
+  {
+    q: "How do I increase strength in the gym?",
+    a: "Progressive overload is the key principle: consistently increasing the weight, reps, or intensity of your lifts over time. Focus on compound movements — squat, deadlift, bench press, and overhead press — eat sufficient protein (1.6–2.2 g per kg of bodyweight), and prioritise sleep. Our trainers at Spark Fitness Zone design structured progressive overload programmes so your strength improves week to week, not just session to session.",
+  },
+  {
+    q: "How do I choose the right gym wear?",
+    a: "Prioritise function over fashion. For lifting: fitted compression shorts or track pants with a breathable dry-fit t-shirt. Avoid loose clothing near free weights — it is a safety hazard. For footwear, flat-soled shoes are better for squats and deadlifts than cushioned running shoes. Lightweight joggers work well for cardio days. Good gym wear that moves with you and wicks sweat will make every session noticeably more comfortable.",
+  },
+  {
+    q: "What is 'natty' in gym culture?",
+    a: "'Natty' is short for natural — it refers to athletes who build their physique entirely without performance-enhancing drugs or anabolic steroids. Being natty means your results come purely from consistent training, proper nutrition, and recovery. Our coaches at Spark Fitness Zone specialise in helping natural athletes make serious, drug-free progress — no shortcuts, no shortcuts needed.",
+  },
+  {
     q: "Is Spark Fitness Zone suitable for beginners?",
-    a: "Absolutely. Our coaches work with members at every level — from first-timers to competitive athletes. We offer a free introductory session where your trainer will assess your current fitness and build a programme tailored to you, not a generic template.",
+    a: "Absolutely. Our coaches work with members at every level — from first-timers to competitive athletes. We offer a free introductory session where your trainer assesses your current fitness and builds a programme tailored to you specifically, not a generic template.",
   },
   {
     q: "What are the gym timings?",
-    a: "We're open every single day — including Sundays and public holidays — from 5:00 AM to 11:00 PM. Both early morning and late evening slots are fully staffed with certified trainers.",
-  },
-  {
-    q: "Can I cancel or pause my membership?",
-    a: "Monthly plans can be cancelled before the next billing cycle with no penalty. Quarterly and Annual plans can be paused once per term for up to 30 days (medical or travel). No lock-in contracts, no hidden fees.",
-  },
-  {
-    q: "Do I get access to a personal trainer?",
-    a: "All plans include at least one dedicated trainer consultation per month. The Quarterly plan includes 2 PT sessions/month, and the Annual plan includes unlimited PT sessions with a dedicated trainer assigned exclusively to you.",
-  },
-  {
-    q: "What payment methods do you accept?",
-    a: "All major Indian payment methods are accepted: UPI (GPay, PhonePe, Paytm), debit and credit cards, and net banking — all secured via Razorpay. Subscriptions auto-renew and can be managed or cancelled from your Razorpay account.",
+    a: "We are open every single day — including Sundays and public holidays — from 5:00 AM to 11:00 PM. Both early morning and late evening slots are fully staffed with certified trainers.",
   },
   {
     q: "What equipment and zones are available?",
     a: "The gym spans two floors. Zones include: strength machines, free weights (full dumbbell and barbell setup), cardio (treadmills, bikes, ellipticals), and a dedicated functional training area with battle ropes, sleds, and plyometric equipment.",
   },
   {
-    q: "Is there parking, and are there changing rooms?",
-    a: "Parking is available at Shalimar Plaza. The gym has separate changing rooms for men and women, with lockers and shower facilities included in every membership plan.",
+    q: "Can I cancel or pause my membership?",
+    a: "Monthly plans can be cancelled before the next billing cycle with no penalty. Quarterly and Annual plans can be paused once per term for up to 30 days for medical or travel reasons. No lock-in contracts, no hidden fees.",
   },
 ] as const;
 
