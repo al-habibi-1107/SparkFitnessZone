@@ -10,6 +10,7 @@ export type ServiceCardData = {
   imageUrl: string;
   name: string;
   desc: string;
+  blurDataURL?: string;
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -96,6 +97,8 @@ function ServiceCard({ service, delay }: { service: ServiceCardData; delay: numb
           fill
           sizes="(max-width: 640px) 100vw, 50vw"
           className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          placeholder={service.blurDataURL ? "blur" : "empty"}
+          blurDataURL={service.blurDataURL}
         />
         <div
           aria-hidden="true"

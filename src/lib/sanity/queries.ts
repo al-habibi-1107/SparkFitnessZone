@@ -8,7 +8,9 @@ export type { Equipment, Trainer, Review, Service, SiteSettings, MembershipPlan,
 export async function getWhyUsSlides(): Promise<WhyUsSlide[]> {
   return getSanityClient().fetch(
     `*[_type == "whyUsSlide"] | order(displayOrder asc){
-      _id, _type, eyebrow, head1, head2, body, bullets, image, imageAlt, displayOrder
+      _id, _type, eyebrow, head1, head2, body, bullets,
+      image{ ..., "lqip": asset->metadata.lqip },
+      imageAlt, displayOrder
     }`
   );
 }
@@ -17,7 +19,11 @@ export async function getWhyUsSlides(): Promise<WhyUsSlide[]> {
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   return getSanityClient().fetch(
-    `*[_type == "siteSettings"][0]{ _id, _type, heroImage, aboutImage }`
+    `*[_type == "siteSettings"][0]{
+      _id, _type,
+      heroImage{ ..., "lqip": asset->metadata.lqip },
+      aboutImage{ ..., "lqip": asset->metadata.lqip }
+    }`
   );
 }
 
@@ -31,7 +37,7 @@ const SERVICE_FIELDS = `
   "slug": slug.current,
   icon,
   description,
-  image
+  image{ ..., "lqip": asset->metadata.lqip }
 `;
 
 export async function getAllServices(): Promise<Service[]> {
@@ -45,7 +51,7 @@ const EQUIPMENT_FIELDS = `
   _type,
   name,
   "slug": slug.current,
-  image,
+  image{ ..., "lqip": asset->metadata.lqip },
   category,
   description,
   muscleGroups,
@@ -89,7 +95,7 @@ const TRAINER_FIELDS = `
   _type,
   name,
   "slug": slug.current,
-  photo,
+  photo{ ..., "lqip": asset->metadata.lqip },
   role,
   yearsExperience,
   specialisms,

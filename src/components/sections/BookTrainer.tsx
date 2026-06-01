@@ -21,7 +21,7 @@ const STATIC: TrainerOption[] = [
     role:        "Assistant Trainer",
     experience:  4,
     specialisms: ["Muscle Building", "Hypertrophy", "Certified Fitness"],
-    imageUrl:    "/assets/trainers/trainer_2.png",
+    imageUrl:    "/assets/trainers/trainer_2.webp",
   },
   {
     slug:        "bikash-kumar",
@@ -29,7 +29,7 @@ const STATIC: TrainerOption[] = [
     role:        "Assistant Trainer",
     experience:  3,
     specialisms: ["Fat Loss", "Overall Health", "Wellness"],
-    imageUrl:    "/assets/trainers/trainer_3.png",
+    imageUrl:    "/assets/trainers/trainer_3.webp",
   },
   {
     slug:        "faizan",
@@ -51,14 +51,15 @@ const STATIC: TrainerOption[] = [
 
 function toOption(t: Trainer): TrainerOption {
   return {
-    slug:        t.slug,
-    name:        t.name,
-    role:        t.role,
-    experience:  t.yearsExperience,
-    specialisms: t.specialisms,
-    imageUrl:    t.photo
-      ? urlForImage(t.photo).width(800).height(600).fit("crop").auto("format").url()
+    slug:         t.slug,
+    name:         t.name,
+    role:         t.role,
+    experience:   t.yearsExperience,
+    specialisms:  t.specialisms,
+    imageUrl:     t.photo
+      ? urlForImage(t.photo).width(800).height(600).fit("crop").quality(70).auto("format").url()
       : null,
+    blurDataURL:  t.photo?.lqip,
   };
 }
 

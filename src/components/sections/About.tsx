@@ -14,6 +14,7 @@ export default async function About() {
           .width(900)
           .height(1125)
           .fit("crop")
+          .quality(70)
           .auto("format")
           .url();
       }

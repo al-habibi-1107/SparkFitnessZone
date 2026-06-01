@@ -42,12 +42,13 @@ export default async function Services() {
       const docs = await getAllServices();
       if (docs.length > 0) {
         services = docs.map((doc, i) => ({
-          num:      String(i + 1).padStart(2, "0"),
-          imageUrl: doc.image
-            ? urlForImage(doc.image).width(800).height(450).fit("crop").auto("format").url()
+          num:         String(i + 1).padStart(2, "0"),
+          imageUrl:    doc.image
+            ? urlForImage(doc.image).width(800).height(450).fit("crop").quality(70).auto("format").url()
             : (STATIC_SERVICES[i]?.imageUrl ?? "/assets/fatloss_1.jpg"),
-          name:     doc.name.toUpperCase(),
-          desc:     doc.description,
+          name:        doc.name.toUpperCase(),
+          desc:        doc.description,
+          blurDataURL: doc.image?.lqip,
         }));
       }
     } catch {

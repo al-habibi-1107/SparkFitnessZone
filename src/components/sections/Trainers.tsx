@@ -34,24 +34,26 @@ const STATIC_TRAINERS = [
 ];
 
 type TrainerCardData = {
-  slug:       string;
-  name:       string;
-  role:       string;
-  experience: number;
-  imageUrl:   string | null;
-  specs:      string[];
+  slug:        string;
+  name:        string;
+  role:        string;
+  experience:  number;
+  imageUrl:    string | null;
+  specs:       string[];
+  blurDataURL?: string;
 };
 
 function toCardData(t: SanityTrainer): TrainerCardData {
   return {
-    slug:       t.slug,
-    name:       t.name,
-    role:       t.role,
-    experience: t.yearsExperience,
-    imageUrl:   t.photo
-      ? urlForImage(t.photo).width(600).height(800).fit("crop").auto("format").url()
+    slug:        t.slug,
+    name:        t.name,
+    role:        t.role,
+    experience:  t.yearsExperience,
+    imageUrl:    t.photo
+      ? urlForImage(t.photo).width(600).height(800).fit("crop").quality(70).auto("format").url()
       : null,
-    specs:      t.specialisms,
+    specs:       t.specialisms,
+    blurDataURL: t.photo?.lqip,
   };
 }
 
@@ -122,6 +124,8 @@ function TrainerCard({ trainer }: { trainer: TrainerCardData }) {
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover object-top"
+            placeholder={trainer.blurDataURL ? "blur" : "empty"}
+            blurDataURL={trainer.blurDataURL}
           />
         ) : null}
       </div>

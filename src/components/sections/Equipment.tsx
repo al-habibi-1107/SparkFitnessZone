@@ -25,14 +25,15 @@ export default async function Equipment() {
       const sanityDocs = await getAllEquipment();
       if (sanityDocs.length > 0) {
         items = sanityDocs.map((doc) => ({
-          slug:     doc.slug,
-          name:     doc.name,
-          category: doc.category,
-          desc:     doc.description,
-          muscles:  doc.muscleGroups,
-          imageUrl: doc.image
-            ? urlForImage(doc.image).width(800).height(450).fit("crop").auto("format").url()
+          slug:        doc.slug,
+          name:        doc.name,
+          category:    doc.category,
+          desc:        doc.description,
+          muscles:     doc.muscleGroups,
+          imageUrl:    doc.image
+            ? urlForImage(doc.image).width(800).height(450).fit("crop").quality(70).auto("format").url()
             : null,
+          blurDataURL: doc.image?.lqip,
         }));
       }
     } catch {
