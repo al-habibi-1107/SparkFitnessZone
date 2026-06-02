@@ -8,12 +8,13 @@ import { motion } from "framer-motion";
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export type TrainerOption = {
-  slug:        string;
-  name:        string;
-  role:        string;
-  experience:  number;
-  specialisms: string[];
-  imageUrl:    string | null;
+  slug:         string;
+  name:         string;
+  role:         string;
+  experience:   number;
+  specialisms:  string[];
+  imageUrl:     string | null;
+  blurDataURL?: string;
 };
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -166,6 +167,8 @@ export default function BookTrainerClient({ trainers }: { trainers: TrainerOptio
                     fill
                     sizes="400px"
                     className="object-cover object-top"
+                    placeholder={active.blurDataURL ? "blur" : "empty"}
+                    blurDataURL={active.blurDataURL}
                   />
                 ) : (
                   /* Placeholder when no Sanity image */

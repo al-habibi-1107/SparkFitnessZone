@@ -7,6 +7,8 @@ export type SanityImageAsset = {
     _ref: string;
     _type: "reference";
   };
+  /** Base64 low-quality image placeholder fetched via asset->metadata.lqip */
+  lqip?: string;
   hotspot?: {
     x: number;
     y: number;

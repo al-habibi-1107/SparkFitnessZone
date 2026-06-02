@@ -10,12 +10,13 @@ import Link from "next/link";
 export type EquipmentCategory = "strength" | "cardio" | "free-weights" | "functional";
 
 export interface EquipmentCardData {
-  slug:     string;
-  name:     string;
-  category: EquipmentCategory;
-  desc:     string;
-  muscles:  string[];
-  imageUrl: string | null;
+  slug:        string;
+  name:        string;
+  category:    EquipmentCategory;
+  desc:        string;
+  muscles:     string[];
+  imageUrl:    string | null;
+  blurDataURL?: string;
 }
 
 type Filter = "all" | EquipmentCategory;
@@ -118,6 +119,8 @@ export default function EquipmentGrid({ items }: { items: EquipmentCardData[] })
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    placeholder={item.blurDataURL ? "blur" : "empty"}
+                    blurDataURL={item.blurDataURL}
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">

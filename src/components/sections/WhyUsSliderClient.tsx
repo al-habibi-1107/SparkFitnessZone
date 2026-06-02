@@ -15,6 +15,7 @@ export type SlideData = {
   bullets: string[];
   image: string;
   imageAlt: string;
+  blurDataURL?: string;
 };
 
 // ── Fallback slide data (used when no CMS content exists yet) ─────────────────
@@ -176,6 +177,8 @@ export default function WhyUsSliderClient({ slides }: { slides: SlideData[] }) {
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority={active === 0}
+                  placeholder={slide.blurDataURL ? "blur" : "empty"}
+                  blurDataURL={slide.blurDataURL}
                 />
 
                 {/* Desktop: left-edge gradient so image blends into text panel */}

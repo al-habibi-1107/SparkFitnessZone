@@ -10,14 +10,15 @@ export default async function WhyUsSlider() {
     try {
       const raw = await getWhyUsSlides();
       slides = raw.map((s) => ({
-        _id:      s._id,
-        eyebrow:  s.eyebrow,
-        head1:    s.head1,
-        head2:    s.head2,
-        body:     s.body,
-        bullets:  s.bullets,
-        image:    urlForImage(s.image).width(1200).height(800).fit("crop").auto("format").url(),
-        imageAlt: s.imageAlt,
+        _id:         s._id,
+        eyebrow:     s.eyebrow,
+        head1:       s.head1,
+        head2:       s.head2,
+        body:        s.body,
+        bullets:     s.bullets,
+        image:       urlForImage(s.image).width(1200).height(800).fit("crop").quality(70).auto("format").url(),
+        imageAlt:    s.imageAlt,
+        blurDataURL: s.image.lqip,
       }));
     } catch {
       // fall through to client-side fallback

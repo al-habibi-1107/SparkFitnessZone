@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
 
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
@@ -26,6 +27,8 @@ const nextConfig: NextConfig = {
         pathname: "/images/**",
       },
     ],
+    deviceSizes: [640, 828, 1080, 1280, 1920],
+    imageSizes: [128, 256, 384, 512],
   },
 
   async headers() {
